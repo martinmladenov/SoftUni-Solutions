@@ -286,3 +286,6 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+
+# Do not ignore specific folders
+!/Software Technologies/05. ExpressJS Calculator/bin/
