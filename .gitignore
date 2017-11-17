@@ -289,3 +289,4 @@ __pycache__/
 
 # Do not ignore specific folders
 !/Software Technologies/05. ExpressJS Calculator/bin/
+!/Software Technologies/06. JS Blog/bin/
