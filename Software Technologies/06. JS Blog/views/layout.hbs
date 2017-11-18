@@ -21,7 +21,7 @@
             {{#if user}}
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/user/details">Welcome({{user.email}})</a></li>
+                        <li><a href="/user/details">Welcome, {{user.fullName}}!</a></li>
                         <li><a href="/article/create">New Article</a></li>
                         <li><a href="/user/logout">Logout</a></li>
                     </ul>
@@ -39,7 +39,9 @@
     </div>
 </header>
 {{#if error }}
-    <h2>{{error}}</h2>
+    <div class="container main-container">
+        <h1 class="text-error">{{error}}</h1>
+    </div>
 {{/if}}
 {{{body}}}
 </body>

@@ -1,0 +1,17 @@
+<div class="container body-content span=8 offset=2">
+    <div class="well">
+        <fieldset>
+            <h2>{{author.fullName}}</h2>
+            <div class="form-group">
+                <label>Articles:</label>
+                <br>
+                <ul>
+                    {{#each articles}}
+                        <li><a href="/article/details/{{this.id}}">{{this.title}}</a></li>
+                    {{/each}}
+                </ul>
+            </div>
+            <a class="btn btn-default" href="/">Cancel</a>
+        </fieldset>
+    </div>
+</div>

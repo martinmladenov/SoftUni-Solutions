@@ -2,6 +2,12 @@ const Article = require('mongoose').model('Article');
 
 module.exports = {
     createGet: (req, res) => {
+
+        if (!req.isAuthenticated()) {
+            errorMsg = 'You should be logged in to make articles!';
+            res.render('error', {error: errorMsg});
+            return;
+        }
         res.render('article/create');
     },
     createPost: (req, res) => {
@@ -9,7 +15,10 @@ module.exports = {
         let errorMsg = '';
         if (!req.isAuthenticated()) {
             errorMsg = 'You should be logged in to make articles!';
-        } else if (!articleArgs.title) {
+            res.render('error', {error: errorMsg});
+            return;
+        }
+        if (!articleArgs.title) {
             errorMsg = 'Invalid title!';
         } else if (!articleArgs.content) {
             errorMsg = 'Invalid content!';

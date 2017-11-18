@@ -1,12 +1,25 @@
 const User = require('mongoose').model('User');
+const Article = require('mongoose').model('Article');
 const encryption = require('./../utilities/encryption');
 
 module.exports = {
     registerGet: (req, res) => {
+        if (req.isAuthenticated()) {
+            let errorMsg = 'You are already logged in!';
+            res.render('/', {error: errorMsg});
+            return;
+        }
+
         res.render('user/register');
     },
 
     registerPost: (req, res) => {
+        if (req.isAuthenticated()) {
+            let errorMsg = 'You are already logged in!';
+            res.render('/', {error: errorMsg});
+            return;
+        }
+
         let registerArgs = req.body;
 
         User.findOne({email: registerArgs.email}).then(user => {
@@ -47,10 +60,22 @@ module.exports = {
     },
 
     loginGet: (req, res) => {
+        if (req.isAuthenticated()) {
+            let errorMsg = 'You are already logged in!';
+            res.render('error', {error: errorMsg});
+            return;
+        }
+
         res.render('user/login');
     },
 
     loginPost: (req, res) => {
+        if (req.isAuthenticated()) {
+            let errorMsg = 'You are already logged in!';
+            res.render('error', {error: errorMsg});
+            return;
+        }
+
         let loginArgs = req.body;
         User.findOne({email: loginArgs.email}).then(user => {
             if (!user || !user.authenticate(loginArgs.password)) {
@@ -72,7 +97,30 @@ module.exports = {
     },
 
     logout: (req, res) => {
+        if (!req.isAuthenticated()) {
+            let errorMsg = 'You are not logged in!';
+            res.render('error', {error: errorMsg});
+            return;
+        }
         req.logOut();
         res.redirect('/');
+    },
+
+    userDetails: (req, res) => {
+        if (!req.isAuthenticated()) {
+            let errorMsg = 'You are not logged in!';
+            res.render('error', {error: errorMsg});
+            return;
+        }
+        Article.find({author: req.user.id}).then(articles =>
+            res.render('user/details', {author: req.user, articles: articles}));
+    },
+
+    userDetailsById: (req, res) => {
+        User.findOne({_id: req.params.id}).then(author =>
+            Article.find({author: author.id}).then(articles =>
+                res.render('user/details', {author: author, articles: articles})));
     }
+
+
 };
