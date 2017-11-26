@@ -1,0 +1,59 @@
+{#
+   This is the base template used as the application layout which contains the
+   common elements and decorates all the other templates.
+   See http://symfony.com/doc/current/book/templating.html#template-inheritance-and-layouts
+#}
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>{% block title %}Calculator{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}">
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+
+<body id="{% block body_id %}{% endblock %}">
+
+{% block header %}
+    <header>
+        <div class="navbar navbar-default navbar-static-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="{{ path('index') }}" class="navbar-brand">CALCULATOR</a>
+
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+<div class="container body-container">
+    {% block body %}
+        <div class="row">
+            <div id="main" class="col-sm-9">
+                {% block main %}{% endblock %}
+            </div>
+        </div>
+    {% endblock %}
+</div>
+
+
+{% block javascripts %}
+    <script src="{{ asset('js/jquery-2.2.4.min.js') }}"></script>
+    <script src="{{ asset('js/moment.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
+{% endblock %}
+
+</body>
+</html>

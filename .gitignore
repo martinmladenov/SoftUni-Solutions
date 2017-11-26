@@ -287,6 +287,11 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 
+# PHP
+vendor/
+var/
+
 # Do not ignore specific folders
 !/Software Technologies/05. ExpressJS Calculator/bin/
 !/Software Technologies/06. JS Blog/bin/
+!/Software Technologies/09. Symfony Calculator/bin
