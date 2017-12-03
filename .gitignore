@@ -291,6 +291,9 @@ __pycache__/
 vendor/
 var/
 
+#IntelliJ Idea
+out/
+
 # Do not ignore specific folders
 !/Software Technologies/05. ExpressJS Calculator/bin/
 !/Software Technologies/06. JS Blog/bin/
