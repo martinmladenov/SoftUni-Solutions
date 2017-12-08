@@ -2,11 +2,16 @@
     <div class="container body-container">
         <div class="row">
             <div id="main" class="col-sm-9">
-                <div>
-                    <span th:text="${user.email}"></span>
-                    <br/>
-                    <span th:text="${user.fullName}"></span>
-                </div>
+                <h1 th:text="${user.fullName}"></h1>
+                <span th:text="${user.email}"></span>
+                <br/>
+                <h3>Your articles:</h3>
+                <ul>
+                    <li th:each="article : ${articles}">
+                        <a th:href="@{/article/{id}(id=${article.id})}"
+                           th:text="${article.title}"></a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
