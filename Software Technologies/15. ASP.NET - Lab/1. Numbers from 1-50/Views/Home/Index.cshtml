@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div class="row">
+    <div class="col-md-4">
+        <h2>Numbers:</h2>
+        <ul class="list-group">
+            @for (int i = 1; i <= 50; i++)
+            {
+                <li class="list-group-item">@i+6</li>
+            }
+        </ul>
+    </div>
+</div>

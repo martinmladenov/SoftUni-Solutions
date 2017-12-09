@@ -1,0 +1,25 @@
+﻿@model List<_2.TODOList.Models.Task>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <h3>TODO List</h3>
+        <ol>
+            @foreach (var task in Model)
+            {
+                <li>@task.Title @Html.ActionLink("[Delete]", "Delete", "Task", htmlAttributes: null, routeValues: new { id = task.Id })</li>
+            }
+        </ol>
+        @using (Html.BeginForm("Create", "Task", null, FormMethod.Post, new { @class = "form-inline" }))
+        {
+            <div class="form-group">
+                <input type="text" class="form-control" name="title" placeholder="Task Title" autofocus="autofocus" />
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Add Task" />
+            </div>
+        }
+    </div>
+</div>
