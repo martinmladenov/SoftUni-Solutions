@@ -1,0 +1,11 @@
+<section class="home">
+    <h2>Tasks:</h2>
+    {{#each tasks}}
+        <article>
+            <a href="/delete/{{this.id}}" class="fa fa-window-close">X</a>
+            <h3>{{this.title}}</h3>
+            <p>{{this.comments}}</p>
+        </article>
+    {{/each}}
+    <a href="/create" id="create-button">Create New</a>
+</section>

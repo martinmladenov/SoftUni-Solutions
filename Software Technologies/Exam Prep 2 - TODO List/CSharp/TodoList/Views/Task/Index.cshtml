@@ -1,0 +1,18 @@
+﻿@model List<TodoList.Models.Task>
+
+@{
+    ViewBag.Title = "List Tasks";
+}
+
+<section class="home">
+    <h2>Tasks:</h2>
+    @foreach (var task in Model)
+    {
+        <article>
+            @Html.ActionLink("X", "Delete", "Task", new { id = task.Id }, new { @class = "fa fa-window-close" })
+            <h3>@task.Title</h3>
+            <p>@task.Comments</p>
+        </article>
+    }
+    @Html.ActionLink("Create New", "Create", "Task", null, new { @id = "create-button" })
+</section>

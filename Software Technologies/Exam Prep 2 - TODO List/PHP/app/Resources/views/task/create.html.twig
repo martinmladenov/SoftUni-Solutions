@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+    <div id="create-wrapper">
+        <section class="create">
+            <article>
+                <form action="{{ path('create') }}" method="POST">
+                    <div class="row">
+                        <label for="task">Task:</label>
+                        <input type="text" id="task" name="task[title]">
+                    </div>
+                    <div class="row">
+                        <label for="comments">Comments:</label>
+                        <textarea id="comments" name="task[comments]"></textarea>
+                    </div>
+
+                    {{ form_row(form._token) }}
+
+                    <button type="submit">Create</button>
+                </form>
+            </article>
+        </section>
+    </div>
+{% endblock %}

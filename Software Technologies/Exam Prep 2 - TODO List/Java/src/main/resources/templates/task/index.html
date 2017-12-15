@@ -1,0 +1,11 @@
+<section class="home">
+    <h2>Tasks:</h2>
+    <th:block th:each="task : ${tasks}">
+        <article>
+            <a th:href="@{/delete/{id}(id=${task.id})}" class="fa fa-window-close">X</a>
+            <h3 th:text="${task.title}"></h3>
+            <p th:text="${task.comments}"></p>
+        </article>
+    </th:block>
+    <a id="create-button" th:href="@{/create}">Create New</a>
+</section>

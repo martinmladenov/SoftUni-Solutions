@@ -1,0 +1,17 @@
+<div id="delete-wrapper">
+    <section class="delete">
+        <article>
+            <form th:action="@{/delete/{id}(id=${task.id})}" method="POST">
+                <h4>Do you want to delete this item?</h4>
+                <div class="box">
+                    <p th:text="${task.title}"></p>
+                </div>
+                <div class="box">
+                    <p class="description" th:text="${task.comments}"></p>
+                </div>
+                <button type="submit">Delete</button>
+                <a th:href="@{/}">Cancel</a>
+            </form>
+        </article>
+    </section>
+</div>

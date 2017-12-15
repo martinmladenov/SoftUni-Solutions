@@ -1,0 +1,64 @@
+body {
+    font-family: Calibri, sans-serif;
+    color: #FFFFFF;
+}
+
+.home {
+    margin: 0 auto;
+    width: 35%;
+}
+
+.home article {
+    width: 46%;
+    padding: 0 5px;
+    display: inline-block;
+    background-color: #4472C4;
+    margin: 5px 0;
+    text-align: center;
+    vertical-align: top;
+    position: relative;
+}
+
+article .fa {
+    font-size: 20px;
+}
+
+.fa-window-close {
+    position: absolute;
+    background: red;
+    padding: 1px 6px 1px 6px;
+    color: #FFFFFF;
+    top: 0;
+    right: 0;
+    text-decoration: none;
+}
+
+.home h2 {
+    color: #000000;
+    text-align: left;
+}
+
+.home h3 {
+    font-size: 14px;
+}
+
+.home p {
+    font-size: 12px;
+}
+
+.home #create-button {
+    width: 120px;
+    background-color: #70AD47;
+    box-shadow: 0 0 15px #4B4B4B;
+    padding: 6px 15px 6px 15px;
+    border: none;
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-weight: 900;
+    outline: none;
+    cursor: pointer;
+    display: block;
+    margin: 10px auto;
+    text-decoration: none;
+    text-align: center;
+}

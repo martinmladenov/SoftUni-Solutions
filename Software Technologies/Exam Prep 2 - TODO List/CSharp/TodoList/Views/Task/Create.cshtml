@@ -1,0 +1,26 @@
+﻿@model TodoList.Models.Task
+
+@{
+    ViewBag.Title = "Create Task";
+}
+
+<div id="create-wrapper">
+    <section class="create">
+        <article>
+            @using (Html.BeginForm("Create", "Task", FormMethod.Post))
+            {
+                <div class="row">
+                    <label for="task">Task:</label>
+                    @Html.TextBoxFor(m => m.Title, new { @id = "task" })
+                </div>
+                <div class="row">
+                    <label for="comments">Comments:</label>
+                    @Html.TextAreaFor(m => m.Comments, new { @id = "comments" })
+                </div>
+                <button type="submit">Create</button>
+
+                @Html.AntiForgeryToken()
+            }
+        </article>
+    </section>
+</div>

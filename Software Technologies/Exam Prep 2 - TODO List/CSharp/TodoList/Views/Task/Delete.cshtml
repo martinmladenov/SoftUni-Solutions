@@ -1,0 +1,26 @@
+﻿@model TodoList.Models.Task
+
+@{
+    ViewBag.Title = "Delete Task";
+}
+
+<div id="delete-wrapper">
+    <section class="delete">
+        <article>
+            @using (Html.BeginForm("DeleteConfirm", "Task", new { id = Model.Id }, FormMethod.Post, null))
+            {
+                <h4>Do you want to delete this item?</h4>
+                <div class="box">
+                    <p>@Model.Title</p>
+                </div>
+                <div class="box">
+                    <p class="description">@Model.Comments</p>
+                </div>
+                <button type="submit">Delete</button>
+                <a href="/">Cancel</a>
+
+                @Html.AntiForgeryToken()
+            }
+        </article>
+    </section>
+</div>
