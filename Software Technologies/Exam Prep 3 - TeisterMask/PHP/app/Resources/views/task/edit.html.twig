@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+    <header>
+        <h3>Edit Task</h3>
+    </header>
+
+    <form method="post">
+        <div>
+            <label class="desc" for="title">Title</label>
+            <div>
+                <input id="title" name="task[title]" type="text" class="field text fn" size="8" tabindex="1" value="{{ task.title }}" autofocus>
+            </div>
+        </div>
+
+        <div>
+            <fieldset>
+                <legend class="desc">
+                    Status
+                </legend>
+
+                <div>
+                    <div>
+                        <input id="status1" name="task[status]" type="radio" value="Open" tabindex="2" {{ task.status == 'Open' ? 'checked' : '' }}>
+                        <label class="choice" for="status1">Open</label>
+                    </div>
+                    <div>
+                        <input id="status2" name="task[status]" type="radio" value="In Progress" tabindex="3" {{ task.status == 'In Progress' ? 'checked' : '' }}>
+                        <label class="choice" for="status2">In Progress</label>
+                    </div>
+                    <div>
+                        <input id="status3" name="task[status]" type="radio" value="Finished" tabindex="4" {{ task.status == 'Finished' ? 'checked' : '' }}>
+                        <label class="choice" for="status3">Finished</label>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div>
+            <div>
+                <input class="button" type="submit" value="Submit">
+                <a class="button cancel" href="/">Cancel</a>
+            </div>
+        </div>
+
+        {{ form_row(form._token) }}
+    </form>
+{% endblock %}

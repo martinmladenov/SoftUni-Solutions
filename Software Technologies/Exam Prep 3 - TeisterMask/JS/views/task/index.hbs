@@ -1,0 +1,32 @@
+<div class="container">
+	<a class="button" href="/create">Create New Task</a>
+</div>
+
+<div class="tasks container">
+	<header>
+		<div class="column header open">Open</div>
+		<div class="column header inProgress">In progress</div>
+		<div class="column header finished">Finished</div>
+	</header>
+	<ul class="column open">
+		{{#each openTasks}}
+			<li>{{title}}
+				<a class="icon edit" href="/edit/{{id}}"></a>
+			</li>
+		{{/each}}
+	</ul>
+	<ul class="column inProgress">
+		{{#each inProgressTasks}}
+			<li>{{title}}
+				<a class="icon edit" href="/edit/{{id}}"></a>
+			</li>
+		{{/each}}
+	</ul>
+	<ul class="column finished">
+		{{#each finishedTasks}}
+			<li>{{title}}
+				<a class="icon edit" href="/edit/{{id}}"></a>
+			</li>
+		{{/each}}
+	</ul>
+</div>

@@ -1,0 +1,35 @@
+<div class="container">
+    <a class="button" th:href="@{/create/}">Create New Task</a>
+</div>
+
+<div class="tasks container">
+    <header>
+        <div class="column header open">Open</div>
+        <div class="column header inProgress">In progress</div>
+        <div class="column header finished">Finished</div>
+    </header>
+    <ul class="column open">
+        <th:block th:each="task : ${openTasks}">
+            <li th:inline="text">
+                [[${task.title}]]
+                <a class="icon edit" th:href="@{/edit/{id}(id=${task.id})}"></a>
+            </li>
+        </th:block>
+    </ul>
+    <ul class="column inProgress">
+        <th:block th:each="task : ${inProgressTasks}">
+            <li th:inline="text">
+                [[${task.title}]]
+                <a class="icon edit" th:href="@{/edit/{id}(id=${task.id})}"></a>
+            </li>
+        </th:block>
+    </ul>
+    <ul class="column finished">
+        <th:block th:each="task : ${finishedTasks}">
+            <li th:inline="text">
+                [[${task.title}]]
+                <a class="icon edit" th:href="@{/edit/{id}(id=${task.id})}"></a>
+            </li>
+        </th:block>
+    </ul>
+</div>

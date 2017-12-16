@@ -1,0 +1,46 @@
+<header>
+    <h3>Edit Task</h3>
+</header>
+
+<form th:action="@{/edit/{id}(id=${task.id})}" method="POST">
+    <div>
+        <label class="desc" for="title">Title</label>
+        <div>
+            <input id="title" name="title" type="text" class="field text fn" th:value="${task.title}" size="8"
+                   tabindex="1" autofocus="autofocus"/>
+        </div>
+    </div>
+
+    <div>
+        <fieldset>
+            <legend id="title5" class="desc">
+                Status
+            </legend>
+
+            <div>
+                <div>
+                    <input id="status1" name="status" type="radio" value="Open" tabindex="2"
+                           th:checked="${task.status.equals('Open')}"/>
+                    <label class="choice" for="status1">Open</label>
+                </div>
+                <div>
+                    <input id="status2" name="status" type="radio" value="In Progress" tabindex="3"
+                           th:checked="${task.status.equals('In Progress')}"/>
+                    <label class="choice" for="status2">In Progress</label>
+                </div>
+                <div>
+                    <input id="status3" name="status" type="radio" value="Finished" tabindex="4"
+                           th:checked="${task.status.equals('Finished')}"/>
+                    <label class="choice" for="status3">Finished</label>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <div>
+        <div>
+            <input class="button" type="submit" value="Submit"/>
+            <a class="button cancel" href="/">Cancel</a>
+        </div>
+    </div>
+</form>

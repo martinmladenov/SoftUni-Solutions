@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+    <div class="container">
+        <a class="button" href="/create">Create New Task</a>
+    </div>
+
+    <div class="tasks container">
+        <header>
+            <div class="column header open">Open</div>
+            <div class="column header inProgress">In progress</div>
+            <div class="column header finished">Finished</div>
+        </header>
+        <ul class="column open">
+            {% for task in openTasks %}
+                <li>{{ task.title }}
+                    <a href="{{ path('edit', {id: task.id}) }}" class="icon edit"></a>
+                </li>
+            {% endfor %}
+        </ul>
+        <ul class="column inProgress">
+            {% for task in inProgressTasks %}
+                <li>{{ task.title }}
+                    <a href="{{ path('edit', {id: task.id}) }}" class="icon edit"></a>
+                </li>
+            {% endfor %}
+        </ul>
+        <ul class="column finished">
+            {% for task in finishedTasks %}
+                <li>{{ task.title }}
+                    <a href="{{ path('edit', {id: task.id}) }}" class="icon edit"></a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

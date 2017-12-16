@@ -1,0 +1,43 @@
+<header>
+	<h3>Edit Task</h3>
+</header>
+
+<form method="post">
+	<div>
+		<label class="desc" for="title">Title</label>
+		<div>
+			<input id="title" name="title" type="text" class="field text fn" value="{{title}}" size="8" tabindex="1" autofocus>
+		</div>
+	</div>
+
+	<div>
+		<fieldset>
+
+			<legend id="title5" class="desc">
+				Status
+			</legend>
+
+			<div>
+				<div>
+					<input id="status1" name="status" type="radio" value="Open" tabindex="2" {{checkif status 'Open'}}>
+					<label class="choice" for="status1">Open</label>
+				</div>
+				<div>
+					<input id="status2" name="status" type="radio" value="In Progress" tabindex="3" {{checkif status 'In Progress'}}>
+					<label class="choice" for="status2">In Progress</label>
+				</div>
+				<div>
+					<input id="status3" name="status" type="radio" value="Finished" tabindex="4" {{checkif status 'Finished'}}>
+					<label class="choice" for="status3">Finished</label>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+
+	<div>
+		<div>
+			<input class="button" type="submit" value="Submit">
+			<a class="button cancel" href="/">Cancel</a>
+		</div>
+	</div>
+</form>
