@@ -110,3 +110,4 @@ typings/
 .env
 
 data/
+!bin/
