@@ -1,0 +1,44 @@
+@model ShoppingList.Models.Product
+
+@{
+    ViewBag.Title = "Edit Product";
+}
+
+<h1>Edit Product</h1>
+
+<section>
+        @using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { onsubmit = "checkValue()" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div>
+                <label for="priority">Priority</label>
+                <input type="text" id="priority" value="@Model.Priority" name="priority">
+                <label for="name">Name</label>
+                <input type="text" id="name" value="@Model.Name" name="name">
+                <label for="quantity">Quantity</label>
+                <input type="text" id="quantity" value="@Model.Quantity" name="quantity">
+                <label for="status">Status</label>
+                <input type="checkbox" id="status" value="@Model.Status" name="status" onclick="switchValue()">
+                <label for="status" id="status-label"></label>
+                <button type="submit" class="accept">Edit</button>
+                <button type="button" class="cancel" onclick="location.href='/';return false;">Cancel</button>
+            </div>
+        }
+</section>
+
+<script>
+    function switchValue() {
+        document.getElementById("status").value =
+                document.getElementById("status").value === "bought" ? "not bought" : "bought";
+    }
+
+    function checkValue() {
+        document.getElementById("status").checked = true;
+    }
+
+    (function checkBox() {
+        let checkbox = document.getElementById("status");
+        checkbox.checked = checkbox.value !== "not bought";
+    })();
+</script>

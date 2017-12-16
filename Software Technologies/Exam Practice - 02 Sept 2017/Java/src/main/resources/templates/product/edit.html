@@ -1,0 +1,36 @@
+<h1>Edit Product</h1>
+<section>
+    <form th:action="@{/edit/{id}(id=${product.id})}" onsubmit="checkValue()" method="POST">
+        <div>
+            <label for="priority">Priority</label>
+            <input type="text" id="priority" th:value="${product.priority}" name="priority" />
+            <label for="name">Name</label>
+            <input type="text" id="name" th:value="${product.name}" name="name" />
+            <label for="quantity">Quantity</label>
+            <input type="text" id="quantity" th:value="${product.quantity}" name="quantity" />
+            <label for="status">Status</label>
+            <input type="checkbox" id="status" name="status" th:value="${product.status}" onclick="switchValue()" />
+            <label for="status" id="status-label"></label>
+            <button type="submit" class="accept">Edit</button>
+            <button type="button" class="cancel" th:onclick="'location.href = \'' + @{/} + '\''">Cancel</button>
+        </div>
+    </form>
+</section>
+
+<script>
+    //<![CDATA[
+    function switchValue() {
+        document.getElementById("status").value =
+                document.getElementById("status").value === "bought" ? "not bought" : "bought";
+    }
+
+    function checkValue() {
+        document.getElementById("status").checked = true;
+    }
+
+    (function checkBox() {
+        let checkbox = document.getElementById("status");
+        checkbox.checked = checkbox.value !== "not bought";
+    })();
+    //]]>
+</script>

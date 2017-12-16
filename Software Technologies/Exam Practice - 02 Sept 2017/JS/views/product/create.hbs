@@ -1,0 +1,16 @@
+<h1>Add New Product</h1>
+<section>
+    <form action="/create" method="POST">
+        <div>
+            <label for="priority">Priority</label>
+            <input type="text" id="priority" name="priority" value="1">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name">
+            <label for="quantity">Quantity</label>
+            <input type="text" id="quantity" name="quantity" value="1">
+            <input type="hidden" name="status" value="not bought">
+            <button type="submit" class="accept">Create</button>
+            <button type="button" class="cancel" onclick="location.href='/'">Cancel</button>
+        </div>
+    </form>
+</section>

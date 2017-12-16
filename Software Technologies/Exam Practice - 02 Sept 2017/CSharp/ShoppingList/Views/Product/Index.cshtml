@@ -1,0 +1,55 @@
+@model List<ShoppingList.Models.Product>
+
+@{
+    ViewBag.Title = "Shopping List";
+}
+
+<h1>Shopping List</h1>
+
+<section>
+    <div>
+        <table>
+            <tr>
+                <th>Priority</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            @foreach (var product in Model.ToList())
+            {
+            <tr>
+                <td>@product.Priority</td>
+                <td>@product.Name</td>
+                <td>@product.Quantity</td>
+                <td>
+                    <input class="checkbox" type="checkbox" value="@product.Status" onclick="preventEvent(event)" name="@product.Name" />
+                    <label for="@product.Name"></label>
+                </td>
+                <td>
+                    <button class="edit" onclick="location.href='/edit/@product.Id';return false;">Edit</button>
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
+</section>
+
+<div>
+    <button class="add-new" onclick="location.href='/create';return false;">+</button>
+</div>
+
+<script>
+    function preventEvent(ev) {
+        ev.preventDefault();
+    }
+    (function checkBox() {
+        let checkboxes = document.getElementsByClassName("checkbox");
+
+        for (let i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].value === "bought") {
+                checkboxes[i].checked = true;
+            }
+        }
+    })();
+</script>

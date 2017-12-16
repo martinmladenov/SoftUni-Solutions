@@ -1,0 +1,50 @@
+<h1>Shopping List</h1>
+
+<section>
+    <div>
+        <table>
+            <tr>
+                <th>Priority</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            {{#each entries}}
+                <tr>
+                    <td>{{this.priority}}</td>
+                    <td>{{this.name}}</td>
+                    <td>{{this.quantity}}</td>
+                    <td>
+                        <input class="checkbox" type="checkbox" value="{{this.status}}" onclick="preventEvent(event)"
+                               name="{{this.name}}"/>
+                        <label for="{{this.name}}"></label>
+                    </td>
+                    <td>
+                        <button class="edit" onclick="location.href='/edit/{{this.id}}'">Edit</button>
+                    </td>
+                </tr>
+            {{/each}}
+        </table>
+    </div>
+</section>
+
+<div>
+    <button class="add-new" onclick="location.href='/create'">+</button>
+</div>
+
+<script>
+    function preventEvent(ev) {
+        ev.preventDefault();
+    }
+
+    (function checkBox() {
+        let checkboxes = document.getElementsByClassName("checkbox");
+
+        for (let i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].value === "bought") {
+                checkboxes[i].checked = true;
+            }
+        }
+    })();
+</script>

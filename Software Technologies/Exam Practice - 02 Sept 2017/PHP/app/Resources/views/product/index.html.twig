@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+<h1>Shopping List</h1>
+
+<section>
+    <div>
+        <table>
+            <tr>
+                <th>Priority</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.priority }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.quantity }}</td>
+                <td>
+                    <input class="checkbox" type="checkbox" value="{{ product.status }}" onclick="preventEvent(event)" name="{{ product.name }}" />
+                    <label for="{{ product.name }}"></label>
+                </td>
+                <td>
+                    <button class="edit" onclick="location.href='/edit/{{ product.id }}'">Edit</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</section>
+
+<div>
+    <button class="add-new" onclick="location.href='/create'">+</button>
+</div>
+
+<script>
+    function preventEvent(ev) {
+        ev.preventDefault();
+    }
+    (function checkBox() {
+        let checkboxes = document.getElementsByClassName("checkbox");
+
+        for(let i = 0; i < checkboxes.length; i++) {
+            if(checkboxes[i].value === "bought") {
+                checkboxes[i].checked = true;
+            }
+        }
+    })();
+</script>
+{% endblock %}

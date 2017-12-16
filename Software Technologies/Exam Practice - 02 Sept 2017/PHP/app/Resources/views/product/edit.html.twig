@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+<h1>Edit Product</h1>
+<section>
+    <form onsubmit="checkValue()" method="POST">
+        <div>
+            <label for="priority">Priority</label>
+            <input type="text" id="priority" value="{{ product.priority }}" name="product[priority]" />
+            <label for="name">Name</label>
+            <input type="text" id="name" value="{{ product.name }}" name="product[name]" />
+            <label for="quantity">Quantity</label>
+            <input type="text" id="quantity" value="{{ product.quantity }}" name="product[quantity]" />
+            <label for="status">Status</label>
+            <input type="checkbox" id="status" value="{{ product.status }}" name="product[status]" onclick="switchValue()">
+            <label for="status" id="status-label"></label>
+
+            {{ form_row(form._token) }}
+
+            <button type="submit" class="accept">Edit</button>
+            <button type="button" class="cancel" onclick="location.href='/'">Cancel</button>
+        </div>
+    </form>
+</section>
+
+<script>
+    function switchValue() {
+        document.getElementById("status").value =
+                document.getElementById("status").value === "bought" ? "not bought" : "bought";
+    }
+
+    function checkValue() {
+        document.getElementById("status").checked = true;
+    }
+
+    (function checkBox() {
+        let checkbox = document.getElementById("status");
+        checkbox.checked = checkbox.value !== "not bought";
+    })();
+</script>
+{% endblock %}
