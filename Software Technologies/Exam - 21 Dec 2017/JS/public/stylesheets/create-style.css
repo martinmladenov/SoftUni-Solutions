@@ -1,0 +1,102 @@
+body {
+    background-color: #F0F0F0;
+}
+
+textarea {
+    resize: none;
+    outline: none;
+    padding: 2%;
+}
+
+.wrapper {
+    width: 70%;
+    margin: 3% auto;
+}
+
+.wrapper .report-create {
+    display: block;
+    width: 100%;
+}
+
+.wrapper .report-create .create-header {
+    width: 100%;
+    text-align: center;
+    font-size: 4em;
+    font-weight: bold;
+}
+
+.wrapper .report-create .create-status,
+.wrapper .report-create .create-message,
+.wrapper .report-create .create-origin
+{
+    display: block;
+    width: 70%;
+    margin: 2% auto;
+}
+
+.wrapper .report-create .create-status .create-status-label,
+.wrapper .report-create .create-message .create-message-label,
+.wrapper .report-create .create-origin .create-origin-label
+{
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.wrapper .report-create .create-status .create-status-content,
+.wrapper .report-create .create-message .create-message-content,
+.wrapper .report-create .create-origin .create-origin-content
+{
+    margin-top: 1%;
+    font-size: 1.5em;
+    width: 95%;
+    border-radius: 10px;
+}
+
+.wrapper .report-create .create-status .create-status-content input {
+}
+
+
+.wrapper .report-create .create-status .create-status-content label {
+    font-weight: bold;
+    margin-right: 7%;
+}
+
+.wrapper .create-button-holder {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin: auto;
+}
+
+.wrapper .create-button-holder>* {
+    display: inline-block;
+    background-color: #F0F0F0;
+}
+
+.wrapper .create-button-holder a[type="button"],
+.wrapper .create-button-holder button
+{
+    width: 30%;
+    margin: auto;
+    padding: 1%;
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: Arial;
+    border-radius: 5px;
+    border: 2px solid #909090;
+    color: #000000;
+    text-decoration: none;
+    text-align: center;
+}
+
+.wrapper .create-button-holder a[type="button"]:hover,
+.wrapper .create-button-holder button:hover {
+    cursor: pointer;
+    background-color: #808080;
+    color: #F0F0F0;
+}
+
+.wrapper .create-button-holder a[type="button"]:hover,
+.wrapper .create-button-holder button:focus {
+    outline: none;
+}

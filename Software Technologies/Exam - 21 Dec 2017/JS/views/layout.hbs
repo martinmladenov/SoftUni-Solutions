@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TeisterMask</title>
+	<link rel='stylesheet' href='/stylesheets/reset.css' />
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+	<link rel='stylesheet' href='/stylesheets/details-style.css' />
+	<link rel='stylesheet' href='/stylesheets/create-style.css' />
+</head>
+<body>
+    {{#if error }}
+        <h2 class="error-msg">{{error}}</h2>
+    {{/if}}
+    {{{body}}}
+</body>
+</html>

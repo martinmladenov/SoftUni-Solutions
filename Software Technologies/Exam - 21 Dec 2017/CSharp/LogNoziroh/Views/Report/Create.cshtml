@@ -1,0 +1,38 @@
+﻿@model LogNoziroh.Models.Report
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="wrapper">
+    @using (Html.BeginForm("Create", "Report", FormMethod.Post, new { @class = "report-create" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="create-header">
+            Log Report
+        </div>
+        <div class="create-status">
+            <div class="create-status-label">Status</div>
+            <div class="create-status-content">
+                <input type="radio" id="normal-status" name="status" value="Normal" checked="checked"/>
+                <label for="normal-status">Normal</label>
+                <input type="radio" id="warning-status" name="status" value="Warning" />
+                <label for="warning-status">Warning</label>
+                <input type="radio" id="critical-status" name="status" value="Critical" />
+                <label for="critical-status">Critical</label>
+            </div>
+        </div>
+        <div class="create-message">
+            <div class="create-message-label">Message</div>
+            <textarea rows="3" class="create-message-content" type="text" name="message"></textarea>
+        </div>
+        <div class="create-origin">
+            <div class="create-origin-label">Origin</div>
+            <textarea rows="3" class="create-origin-content" type="text" name="origin"></textarea>
+        </div>
+        <div class="create-button-holder">
+            <button type="submit" class="submit-button">Log Report</button>
+            <a type="button" href="/" class="back-button">Back</a>
+        </div>
+    }
+</div>

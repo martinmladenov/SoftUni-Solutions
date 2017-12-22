@@ -1,0 +1,24 @@
+<div class="wrapper">
+    <div class="button-holder">
+        <a type="button" href="/create" class="log-button">Log New Report</a>
+    </div>
+    <div class="content">
+        <div class="header">
+            <div class="message-label">Message</div>
+            <div class="actions-label">Actions</div>
+        </div>
+        <div class="main">
+            {{#each reports}}
+            <div class="report {{toLowerCase status}}-report">
+                <div class="report-message">
+                    {{compress message}}
+                </div>
+                <div class="report-actions">
+                    <a type="button" href="/details/{{id}}" class="details-button">Details</a>
+                    <a type="button" href="/delete/{{id}}" class="delete-button">Delete</a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

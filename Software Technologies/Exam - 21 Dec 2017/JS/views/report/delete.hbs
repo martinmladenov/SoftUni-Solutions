@@ -1,0 +1,30 @@
+<div class="wrapper">
+    <form class="report-create" method="post">
+        <div class="create-header">
+            Archive Report
+        </div>
+        <div class="create-status">
+            <div class="create-status-label">Status</div>
+            <div class="create-status-content">
+                <input type="radio" id="normal-status" name="status" value="Normal" {{checkif status 'Normal'}} disabled/>
+                <label for="normal-status">Normal</label>
+                <input type="radio" id="warning-status" name="status" value="Warning" {{checkif status 'Warning'}} disabled/>
+                <label for="warning-status">Warning</label>
+                <input type="radio" id="critical-status" name="status" value="Critical" {{checkif status 'Critical'}} disabled/>
+                <label for="critical-status">Critical</label>
+            </div>
+        </div>
+        <div class="create-message">
+            <div class="create-message-label">Message</div>
+            <textarea rows="3" class="create-message-content" name="message" disabled>{{message}}</textarea>
+        </div>
+        <div class="create-origin">
+            <div class="create-origin-label">Origin</div>
+            <textarea rows="3" class="create-origin-content" name="origin" disabled>{{origin}}</textarea>
+        </div>
+        <div class="create-button-holder">
+            <button type="submit" class="submit-button">Archive Report</button>
+            <a type="button" href="/" class="back-button">Back</a>
+        </div>
+    </form>
+</div>

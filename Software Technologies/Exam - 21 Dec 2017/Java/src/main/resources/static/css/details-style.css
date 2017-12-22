@@ -1,0 +1,74 @@
+body {
+    background-color: #F0F0F0;
+}
+
+.wrapper {
+    width: 70%;
+    margin: 3% auto;
+}
+
+.wrapper .report-details {
+    display: block;
+    width: 100%;
+}
+
+.wrapper .report-details .details-header {
+    width: 100%;
+    text-align: center;
+    font-size: 4em;
+    font-weight: bold;
+}
+
+.wrapper .report-details .details-status,
+.wrapper .report-details .details-message,
+.wrapper .report-details .details-origin
+{
+    display: block;
+    width: 70%;
+    margin: 4% auto;
+}
+
+.wrapper .report-details .details-status .details-status-label,
+.wrapper .report-details .details-message .details-message-label,
+.wrapper .report-details .details-origin .details-origin-label
+{
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.wrapper .report-details .details-status .details-status-content,
+.wrapper .report-details .details-message .details-message-content,
+.wrapper .report-details .details-origin .details-origin-content
+{
+    margin-top: 1%;
+    font-size: 1.5em;
+}
+
+.wrapper .details-button-holder a[type="button"],
+.wrapper .details-button-holder.details-button-holder button
+{
+    display: block;
+    width: 20%;
+    margin: auto;
+    padding: 1%;
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: Arial;
+    border-radius: 5px;
+    border: 2px solid #909090;
+    color: #000000;
+    text-decoration: none;
+    text-align: center;
+}
+
+.wrapper .details-button-holder a[type="button"]:hover,
+.wrapper .details-button-holder button:hover {
+    cursor: pointer;
+    background-color: #808080;
+    color: #F0F0F0;
+}
+
+s.wrapper .details-button-holder a[type="button"]:hover,
+.wrapper .details-button-holder button:focus {
+    outline: none;
+}

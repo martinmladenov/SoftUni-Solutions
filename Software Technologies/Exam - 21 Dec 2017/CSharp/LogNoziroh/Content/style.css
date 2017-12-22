@@ -1,0 +1,118 @@
+body {
+    background-color: #F0F0F0;
+}
+
+.wrapper {
+    width: 70%;
+    margin: 3% auto;
+}
+
+.wrapper>* {
+    display: block;
+    width: 100%;
+}
+
+.wrapper .button-holder a[type="button"],
+.wrapper .button-holder button
+{
+    display: block;
+    width: 20%;
+    margin: auto;
+    padding: 1%;
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: Arial;
+    border-radius: 5px;
+    border: 2px solid #909090;
+    color: #000000;
+    text-decoration: none;
+    text-align: center;
+}
+
+.wrapper .button-holder a[type="button"]:hover,
+.wrapper .button-holder button:hover {
+    cursor: pointer;
+    background-color: #808080;
+    color: #F0F0F0;
+}
+
+.wrapper .button-holder a[type="button"]:hover,
+.wrapper .button-holder button:focus {
+    outline: none;
+}
+
+.wrapper .content {
+    display: block;
+    width: 100%;
+    margin-top: 3%;
+}
+
+.wrapper .content .header {
+    display: block;
+    width: 100%;
+    background-color: #D0D0D0;
+    border-bottom: 5px solid #303030;
+}
+
+.wrapper .content .header>* {
+    display: inline-block;
+    font-size: 2em;
+    font-weight: bold;
+    padding: 1%;
+    margin-left: 3%;
+}
+
+.wrapper .content .header .message-label {
+    width: 65%;
+}
+
+.wrapper .content .header .actions-label {
+    width: 20%;
+}
+
+.wrapper .content .main {
+    background-color: #C0C0C0;
+}
+
+.wrapper .content .main .report {
+    display: block;
+    width: 100%;
+}
+
+.critical-report {
+    background-color: #FF4500;
+}
+
+.warning-report {
+    background-color: #FFA500;
+}
+
+.normal-report {
+    /*background-color: #00FF7F;*/
+}
+
+.wrapper .content .main .report>* {
+    display: inline-block;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 1%;
+    margin-left: 3%;
+}
+
+.wrapper .content .main .report .report-message {
+    width: 65%;
+}
+
+.wrapper .content .main .report .report-actions {
+    width: 20%;
+}
+
+.wrapper .content .main .report .report-actions>* {
+    padding-right: 5%;
+    padding-left: 5%;
+    text-decoration: none;
+    color: #000000;
+    border-right: 2px solid #000000;
+    border-left: 2px solid #000000;
+    border-radius: 5px;
+}

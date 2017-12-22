@@ -1,0 +1,22 @@
+<div class="wrapper">
+    <div class="report-details">
+        <div class="details-header">
+            Report Details
+        </div>
+        <div class="details-status">
+            <div class="details-status-label">Status</div>
+            <div class="details-status-content" th:text="${report.status}"></div>
+        </div>
+        <div class="details-message">
+            <div class="details-message-label">Message</div>
+            <div class="details-message-content" th:text="${report.message}"></div>
+        </div>
+        <div class="details-origin">
+            <div class="details-origin-label">Origin</div>
+            <div class="details-origin-content" th:text="${report.origin}"></div>
+        </div>
+    </div>
+    <div class="details-button-holder">
+        <a type="button" href="/" class="back-button">Back</a>
+    </div>
+</div>

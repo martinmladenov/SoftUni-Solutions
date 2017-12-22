@@ -1,0 +1,31 @@
+﻿@model List<LogNoziroh.Models.Report>
+
+@{
+	ViewBag.Title = "Index";
+}
+
+<div class="wrapper">
+    <div class="button-holder">
+        <a type="button" href="/create" class="log-button">Log New Report</a>
+    </div>
+    <div class="content">
+        <div class="header">
+            <div class="message-label">Message</div>
+            <div class="actions-label">Actions</div>
+        </div>
+        <div class="main">
+            @foreach (var report in Model.ToList())
+            {
+                <div class="report @(report.Status.ToLower())-report">
+                    <div class="report-message">
+                        @(report.Message.Length > 50 ? report.Message.Substring(0, 50) + "..." : report.Message)
+                    </div>
+                    <div class="report-actions">
+                        @Html.ActionLink("Details", "Details", "Report", new { id = report.Id }, new { @class = "details-button" })
+                        @Html.ActionLink("Delete", "Delete", "Report", new { id = report.Id }, new { @class = "delete-button" })
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

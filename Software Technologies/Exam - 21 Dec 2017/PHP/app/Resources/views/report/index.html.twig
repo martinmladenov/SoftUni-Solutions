@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+<div class="wrapper">
+    <div class="button-holder">
+        <a type="button" href="/create" class="log-button">Log New Report</a>
+    </div>
+    <div class="content">
+        <div class="header">
+            <div class="message-label">Message</div>
+            <div class="actions-label">Actions</div>
+        </div>
+        <div class="main">
+            {% for report in reports %}
+            <div class="report {{ report.status|lower }}-report">
+                <div class="report-message">
+                    {{ report.message|length > 50 ? (report.message|slice(0, 50)) ~ '...' : report.message}}
+                </div>
+                <div class="report-actions">
+                    <a type="button" href="{{ path('details', {id: report.id}) }}" class="details-button">Details</a>
+                    <a type="button" href="{{ path('delete', {id: report.id}) }}" class="delete-button">Delete</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

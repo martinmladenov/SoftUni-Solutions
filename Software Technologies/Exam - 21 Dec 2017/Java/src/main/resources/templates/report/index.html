@@ -1,0 +1,23 @@
+<div class="wrapper" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="button-holder">
+        <a type="button" th:href="@{/create/}" class="log-button">Log New Report</a>
+    </div>
+    <div class="content">
+        <div class="header">
+            <div class="message-label">Message</div>
+            <div class="actions-label">Actions</div>
+        </div>
+        <div class="main">
+            <th:block th:each="report : ${reports}">
+            <div th:class="'report ' + ${report.status.toLowerCase()} + '-report'">
+                <div th:if="${report.message.length() &gt; 50}" class="report-message" th:text="${report.message.substring(0, 50) + '...'}"></div>
+                <div th:if="${report.message.length() &lt;= 50}" class="report-message" th:text="${report.message}"></div>
+                <div class="report-actions">
+                    <a type="button" th:href="@{/details/{id}(id=${report.id})}" class="details-button">Details</a>
+                    <a type="button" th:href="@{/delete/{id}(id=${report.id})}" class="delete-button">Delete</a>
+                </div>
+            </div>
+            </th:block>
+        </div>
+    </div>
+</div>
