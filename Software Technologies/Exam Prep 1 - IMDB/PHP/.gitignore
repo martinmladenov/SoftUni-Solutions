@@ -92,3 +92,4 @@ fabric.properties
 /.web-server-pid
 
 /vendor/
+!bin/
