@@ -4,8 +4,11 @@ using System.Collections.Generic;
 
 public class AStar
 {
-
     private char[,] map;
+
+    private PriorityQueue<Node> open;
+    private Dictionary<Node, Node> parent;
+    private Dictionary<Node, int> cost;
 
     public AStar(char[,] map)
     {
@@ -29,6 +32,11 @@ public class AStar
 
         this.map = map;
 
+        open = new PriorityQueue<Node>();
+
+        parent = new Dictionary<Node, Node>();
+        cost = new Dictionary<Node, int>();
+
         Console.WriteLine($"{{ {string.Join(", ", GetPath(start, goal))} }}");
     }
 
@@ -48,12 +56,7 @@ public class AStar
                    col >= 0 && col < map.GetLength(1) &&
                    (map[row, col] == '-' || map[row, col] == '*');
         }
-
-        PriorityQueue<Node> open = new PriorityQueue<Node>();
         open.Enqueue(start);
-
-        Dictionary<Node, Node> parent = new Dictionary<Node, Node>();
-        Dictionary<Node, int> cost = new Dictionary<Node, int>();
         parent[start] = null;
         cost[start] = 0;
 
