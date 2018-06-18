@@ -1,0 +1,5 @@
+CREATE FUNCTION ufn_CalculateFutureValue(@i DECIMAL(15,4), @r FLOAT, @T INT)
+RETURNS DECIMAL(15, 4) AS
+BEGIN
+	RETURN @i*(POWER(1 + @r, @t))
+END
