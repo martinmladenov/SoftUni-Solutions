@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<albums>
+  <album title="OK Computer" artist="Radiohead" year="1997" producer="Nigel Godrich" price="24.99">
+    <song title="Airbag" length="4:44"/>
+    <song title="Paranoid Android" length="6:23"/>
+    <song title="Subterranean Homesick Alien" length="4:27"/>
+    <song title="Exit Music (For a Film)" length="4:24"/>
+    <song title="Let Down" length="4:59"/>
+    <song title="Karma Police" length="4:21"/>
+    <song title="Fitter Happier" length="1:57"/>
+    <song title="Electioneering" length="3:50"/>
+    <song title="Climbing Up the Walls" length="4:45"/>
+    <song title="No Surprises" length="3:48"/>
+    <song title="Lucky" length="4:19"/>
+    <song title="The Tourist" length="5:24"/>
+  </album>
+  <album title="The King of Limbs" artist="Radiohead" year="2011" producer="Nigel Godrich" price="14.99">
+    <song title="Bloom" length="5:15"/>
+    <song title="Morning Mr Magpie" length="4:41"/>
+    <song title="Little by Little" length="4:27"/>
+    <song title="Feral" length="3:13"/>
+    <song title="Lotus Flower" length="5:01"/>
+    <song title="Codex" length="4:47"/>
+    <song title="Give Up the Ghost" length="4:50"/>
+    <song title="Separator" length="5:20"/>
+  </album>
+  <album title="Dummy" artist="Portishead" year="1994" producer="Portishead" price="19.99">
+    <song title="Mysterons" length="5:02"/>
+    <song title="Sour Times" length="4:11"/>
+    <song title="Strangers" length="3:55"/>
+    <song title="It Could Be Sweet" length="4:16"/>
+    <song title="Wandering Star" length="4:51"/>
+    <song title="It's a Fire" length="3:49"/>
+    <song title="Numb" length="3:54"/>
+    <song title="Roads" length="5:02"/>
+    <song title="Pedestal" length="3:39"/>
+    <song title="Biscuit" length="5:01"/>
+    <song title="Glory Box" length="5:06"/>
+  </album>
+</albums>

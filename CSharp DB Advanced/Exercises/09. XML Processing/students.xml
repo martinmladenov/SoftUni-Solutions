@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<students>
+  <student>
+    <name>Ivan Ivanov</name>
+    <gender>Male</gender>
+    <birthDate>1999/12/23</birthDate>
+    <email>ivan.ivanov@abb.bg</email>
+    <university>Software University</university>
+    <specialty>C# Web Developer</specialty>
+    <facultyNumber>1234567885</facultyNumber>
+    <exams>
+      <exam>
+        <name>Programming Basics</name>
+        <dateTaken>2017/01/01</dateTaken>
+        <grade>6.0</grade>
+      </exam>
+      <exam>
+        <name>Programming Fundamentals</name>
+        <dateTaken>2017/03/10</dateTaken>
+        <grade>5.62</grade>
+      </exam>
+      <exam>
+        <name>C# Advanced</name>
+        <dateTaken>2017/06/07</dateTaken>
+        <grade>5.8</grade>
+      </exam>
+    </exams>
+  </student>
+  <student>
+    <name>Georgi Stoyanov</name>
+    <gender>Male</gender>
+    <birthDate>1997/12/13</birthDate>
+    <email>georgi@gmail.com</email>
+    <university>Software University</university>
+    <specialty>C# Web Developer</specialty>
+    <facultyNumber>1234567894</facultyNumber>
+    <exams>
+      <exam>
+        <name>Programming Basics</name>
+        <dateTaken>2018/01/04</dateTaken>
+        <grade>5.32</grade>
+      </exam>
+      <exam>
+        <name>Programming Fundamentals</name>
+        <dateTaken>2018/03/13</dateTaken>
+        <grade>4.72</grade>
+      </exam>
+      <exam>
+        <name>C# Advanced</name>
+        <dateTaken>2018/06/17</dateTaken>
+        <grade>4.8</grade>
+      </exam>
+    </exams>
+  </student>
+  <student>
+    <name>Yoana Georgieva</name>
+    <gender>Female</gender>
+    <birthDate>2000/04/15</birthDate>
+    <email>yoana.georgieva15@mail.bg</email>
+    <university>Software University</university>
+    <specialty>Java Web Developer</specialty>
+    <facultyNumber>1234567842</facultyNumber>
+    <exams>
+      <exam>
+        <name>Programming Basics</name>
+        <dateTaken>2017/01/01</dateTaken>
+        <grade>6.0</grade>
+      </exam>
+      <exam>
+        <name>Programming Fundamentals</name>
+        <dateTaken>2017/03/10</dateTaken>
+        <grade>6.0</grade>
+      </exam>
+      <exam>
+        <name>Java Advanced</name>
+        <dateTaken>2017/06/09</dateTaken>
+        <grade>6.0</grade>
+      </exam>
+    </exams>
+  </student>
+</students>
