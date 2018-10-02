@@ -1,6 +1,7 @@
 namespace SIS.HTTP.Headers
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
 
     public class HttpHeaderCollection : IHttpHeaderCollection
@@ -32,9 +33,19 @@ namespace SIS.HTTP.Headers
             return header;
         }
 
+        public IEnumerator<HttpHeader> GetEnumerator()
+        {
+            return this.headers.Values.GetEnumerator();
+        }
+
         public override string ToString()
         {
             return string.Join(Environment.NewLine, this.headers.Values);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
         }
     }
 }

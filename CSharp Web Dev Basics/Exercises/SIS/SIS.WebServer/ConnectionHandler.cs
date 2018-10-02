@@ -2,12 +2,15 @@
 {
     using System;
     using System.Net.Sockets;
+    using System.Reflection.Emit;
     using System.Text;
     using System.Threading.Tasks;
+    using HTTP.Cookies;
     using HTTP.Enums;
     using HTTP.Exceptions;
     using HTTP.Requests;
     using HTTP.Responses;
+    using HTTP.Sessions;
     using Results;
     using Routing;
 
@@ -66,6 +69,25 @@
             return this.serverRoutingTable.Routes[httpRequest.RequestMethod][httpRequest.Path].Invoke(httpRequest);
         }
 
+        private string SetRequestSession(IHttpRequest httpRequest)
+        {
+            string sessionId;
+
+            if (httpRequest.Cookies.ContainsCookie(HttpSessionStorage.SessionCookieKey))
+            {
+                var cookie = httpRequest.Cookies.GetCookie(HttpSessionStorage.SessionCookieKey);
+                sessionId = cookie.Value;
+            }
+            else
+            {
+                sessionId = Guid.NewGuid().ToString();
+            }
+            
+            httpRequest.Session = HttpSessionStorage.GetSession(sessionId);
+
+            return sessionId;
+        }
+
         private async Task PrepareResponse(IHttpResponse httpResponse)
         {
             byte[] byteSegments = httpResponse.GetBytes();
@@ -81,7 +103,12 @@
 
                 if (httpRequest != null)
                 {
+                    string sessionId = this.SetRequestSession(httpRequest);
+                    
                     var httpResponse = this.HandleRequest(httpRequest);
+
+                    this.SetResponseSession(httpResponse, sessionId);
+                    
                     await this.PrepareResponse(httpResponse);
                 }
             }
@@ -97,6 +124,14 @@
             }
 
             this.client.Shutdown(SocketShutdown.Both);
+        }
+
+        private void SetResponseSession(IHttpResponse httpResponse, string sessionId)
+        {
+            if (sessionId != null)
+            {
+                httpResponse.Cookies.Add(new HttpCookie(HttpSessionStorage.SessionCookieKey, $"{sessionId}; HttpOnly"));
+            }
         }
     }
 }

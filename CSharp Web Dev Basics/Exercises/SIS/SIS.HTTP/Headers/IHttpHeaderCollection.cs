@@ -1,6 +1,8 @@
 namespace SIS.HTTP.Headers
 {
-    public interface IHttpHeaderCollection
+    using System.Collections.Generic;
+
+    public interface IHttpHeaderCollection : IEnumerable<HttpHeader>
     {
         void Add(HttpHeader header);
 

@@ -1,8 +1,10 @@
 namespace SIS.HTTP.Requests
 {
     using System.Collections.Generic;
+    using Cookies;
     using Enums;
     using Headers;
+    using Sessions;
 
     public interface IHttpRequest
     {
@@ -17,5 +19,9 @@ namespace SIS.HTTP.Requests
         IHttpHeaderCollection Headers { get; }
         
         HttpRequestMethod RequestMethod { get; }
+        
+        IHttpCookieCollection Cookies { get; }
+        
+        IHttpSession Session { get; set; }
     }
 }

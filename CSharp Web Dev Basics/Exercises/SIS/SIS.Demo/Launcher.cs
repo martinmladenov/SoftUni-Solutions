@@ -11,7 +11,7 @@
             ServerRoutingTable serverRoutingTable = new ServerRoutingTable();
             
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/"] = request => new HomeController().Index(request); 
-            serverRoutingTable.Routes[HttpRequestMethod.Get]["/SetCookies"] = request => new HomeController().SetCookies(request);
+            serverRoutingTable.Routes[HttpRequestMethod.Get]["/SetData"] = request => new HomeController().SetData(request);
 
             
             Server server = new Server(8000, serverRoutingTable);

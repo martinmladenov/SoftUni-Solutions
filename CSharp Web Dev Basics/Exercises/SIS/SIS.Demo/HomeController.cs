@@ -1,7 +1,9 @@
 namespace SIS.Demo
 {
     using System;
+    using System.Text;
     using System.Threading;
+    using HTTP.Cookies;
     using HTTP.Enums;
     using HTTP.Requests;
     using HTTP.Responses;
@@ -11,24 +13,37 @@ namespace SIS.Demo
     {
         public IHttpResponse Index(IHttpRequest request)
         {
-            string content = "<h1>Hello, World!</h1>";
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("<h1>Hello, World!</h1>");
 
-            content += $"<p>Start: {DateTime.Now:hh:mm:ss.fff}</p>";
+            sb.AppendLine("<b>Your cookies:</b>");
+            sb.AppendLine("<ul>");
+            foreach (var cookie in request.Cookies)
+            {
+                sb.AppendLine($"<li>{cookie.Key} = {cookie.Value}</li>");
+            }
             
-            Thread.Sleep(5000);
+            sb.AppendLine("</ul>");
+
+            string param = request.Session.ContainsParameter("example")
+                ? (string)request.Session.GetParameter("example")
+                : "None";
             
-            content += $"<p>End:   {DateTime.Now:hh:mm:ss.fff}</p>";
+            sb.AppendLine($"<b>Your example session parameter: </b> {param}");
+            
+            
+            
+            sb.AppendLine("<a href=\"/SetData\">Set Cookies and session parameter</a>");
 
-            //if (request.Cookies.ContainsCookie("kluch"))
-            //    content += $"<p>kluch: {request.Cookies.GetCookie("kluch").Value}</p>";
-
-            return new HtmlResult(content, HttpResponseStatusCode.Ok);
+            return new HtmlResult(sb.ToString(), HttpResponseStatusCode.Ok);
         }
 
-        public IHttpResponse SetCookies(IHttpRequest request)
+        public IHttpResponse SetData(IHttpRequest request)
         {
             RedirectResult result = new RedirectResult("/");
-            //result.Cookies.Add(new HttpCookie("kluch", "stoinost"));
+            result.Cookies.Add(new HttpCookie("cookie1", "value1", 1));
+            result.Cookies.Add(new HttpCookie("cookie2", "value2"));
+            request.Session.AddParameter("example", "testParamValue");
             return result;
         }
     }
