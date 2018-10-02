@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIS.HTTP", "SIS.HTTP\SIS.HTTP.csproj", "{00CC0BC7-283F-458C-8290-B88A899FC066}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIS.WebServer", "SIS.WebServer\SIS.WebServer.csproj", "{1BE92EE8-BA9B-4B4E-95D3-58B12A06870E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIS.Demo", "SIS.Demo\SIS.Demo.csproj", "{8F289323-5C17-45FA-8D61-1A966AA149CA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00CC0BC7-283F-458C-8290-B88A899FC066}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00CC0BC7-283F-458C-8290-B88A899FC066}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00CC0BC7-283F-458C-8290-B88A899FC066}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00CC0BC7-283F-458C-8290-B88A899FC066}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BE92EE8-BA9B-4B4E-95D3-58B12A06870E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BE92EE8-BA9B-4B4E-95D3-58B12A06870E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BE92EE8-BA9B-4B4E-95D3-58B12A06870E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BE92EE8-BA9B-4B4E-95D3-58B12A06870E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F289323-5C17-45FA-8D61-1A966AA149CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F289323-5C17-45FA-8D61-1A966AA149CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F289323-5C17-45FA-8D61-1A966AA149CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F289323-5C17-45FA-8D61-1A966AA149CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
