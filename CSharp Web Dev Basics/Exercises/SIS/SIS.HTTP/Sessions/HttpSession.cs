@@ -29,6 +29,11 @@ namespace SIS.HTTP.Sessions
             this.parameters[name] = parameter;
         }
 
+        public void RemoveParameter(string name)
+        {
+            this.parameters.Remove(name);
+        }
+
         public void ClearParameters()
         {
             this.parameters.Clear();

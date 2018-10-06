@@ -3,6 +3,7 @@ namespace SIS.HTTP.Requests
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
     using Common;
     using Cookies;
     using Enums;
@@ -165,7 +166,7 @@ namespace SIS.HTTP.Requests
                     throw new BadRequestException();
                 }
 
-                this.QueryData.Add(split[0], split[1]);
+                this.QueryData.Add(split[0], WebUtility.UrlDecode(split[1]));
             }
         }
 
@@ -187,7 +188,7 @@ namespace SIS.HTTP.Requests
                     throw new BadRequestException();
                 }
 
-                this.FormData.Add(split[0], split[1]);
+                this.FormData.Add(split[0], WebUtility.UrlDecode(split[1]));
             }
         }
 
