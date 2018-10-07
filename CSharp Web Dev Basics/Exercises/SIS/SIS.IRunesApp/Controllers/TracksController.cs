@@ -102,9 +102,9 @@ namespace SIS.IRunesApp.Controllers
                 return this.Error("No track id specified", HttpResponseStatusCode.BadRequest, request);
             }
 
-            var albumId = (string) request.QueryData["id"];
+            var trackId = (string) request.QueryData["id"];
 
-            Track track = this.Db.Tracks.FirstOrDefault(a => a.Id == albumId);
+            Track track = this.Db.Tracks.Include(t => t.Album).FirstOrDefault(a => a.Id == trackId);
 
             if (track == null)
             {
@@ -116,7 +116,8 @@ namespace SIS.IRunesApp.Controllers
                 {"Name", track.Name},
                 {"Link", track.Link},
                 {"AlbumId", track.AlbumId},
-                {"Price", track.Price.ToString("F2")}
+                {"Price", track.Price.ToString("F2")},
+                {"AlbumName", track.Album.Name}
             };
 
             return this.View("Tracks/Details", request, viewBag);

@@ -21,13 +21,24 @@ namespace SIS.IRunesApp.Controllers
 
             StringBuilder sb = new StringBuilder();
 
-            var albums = this.Db.Albums.ToArray();
+            var albums = this.Db.Albums.Include(a => a.Tracks).ToArray();
 
             if (albums.Length > 0)
             {
                 foreach (var album in albums)
                 {
-                    sb.AppendLine($"<a href=\"/Albums/Details?id={album.Id}\">{album.Name}</a><br>");
+                    sb.AppendLine($@"
+                    <div class=""col-md-4 col-sm-12"" style=""margin-bottom: 25px;"">
+                    <div class=""card"">
+                    <img class=""card-img-top"" style=""height: 180px; width: 100%; display: block; object-fit: cover;""
+                    src=""{album.Cover}"" alt=""{album.Name}"">
+                    <div class=""card-body"">
+                    <h5 class=""card-title"">{album.Name}</h5>
+                    <p class=""card-text"">${album.Price:F2}</p>
+                    <a href=""/Albums/Details?id={album.Id}"" class=""btn btn-primary"">View</a>
+                    </div>
+                    </div>
+                    </div>");
                 }
             }
             else
@@ -106,14 +117,12 @@ namespace SIS.IRunesApp.Controllers
 
             StringBuilder sb = new StringBuilder();
 
-            var tracks = album.Tracks.ToArray();
-
-            if (tracks.Length > 0)
+            if (album.Tracks.ToArray().Length > 0)
             {
-                for (var index = 0; index < tracks.Length; index++)
+                foreach (var track in album.Tracks)
                 {
-                    var track = tracks[index];
-                    sb.AppendLine($"<li>{index + 1}. <a href=\"/Tracks/Details?id={track.Id}\">{track.Name}</a></li>");
+                    sb.AppendLine("<a class=\"list-group-item list-group-item-action\" href=\"/Tracks/Details?" +
+                                  $"id={track.Id}\">{track.Name}</a>");
                 }
             }
             else

@@ -1,15 +1,14 @@
-<img src="@Model.CoverUrl" alt="@Model.Name"/>
-<br>
-<h2>Name: @Model.Name</h2>
-<h2>Price: $@Model.Price</h2>
-<br>
-<br>
+<h1>@Model.Name</h1>
+<hr>
+<div class="row">
+    <img class="img-fluid col-md-6 col-sm-12" src="@Model.CoverUrl" alt="@Model.Name"/>
+    <h3 class="col-md-6 col-sm-12 text-right">Price: $@Model.Price</h3>
+</div>
+<hr>
+<a class="btn btn-secondary float-right" href="/Tracks/Create?albumId=@Model.AlbumId">Create Track</a>
 <h2>Tracks</h2>
-<hr>
-<a href="/Tracks/Create?albumId=@Model.AlbumId">Create Track</a>
-<hr>
-<ul>
+<div class="list-group">
     @Model.Tracks
-</ul>
+</div>
 <hr>
-<a href="/Albums/All">Back To All</a>
+<a class="btn btn-secondary" href="/Albums/All">Back to All</a>
