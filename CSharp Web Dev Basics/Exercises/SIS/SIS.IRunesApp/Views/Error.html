@@ -1,7 +1,8 @@
-<h2 class="alert alert-danger">Error: @Model.Error</h2>
-
-<button class="btn btn-primary center" onclick="goBack()">Go Back</button>
-
+<div class="container text-center">
+    <h2>Error: @Model.Error</h2>
+    <br>
+    <button class="btn btn-green" onclick="goBack()">Go Back</button>
+</div>
 <script>
     function goBack() {
         window.history.back();

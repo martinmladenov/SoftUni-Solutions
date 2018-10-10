@@ -1,23 +1,24 @@
-<h1>Register</h1>
-<hr>
-<form action="/Users/Register" method="post">
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input class="form-control" type="text" name="username" id="username">
-    </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input class="form-control" type="password" name="password" id="password">
-    </div>
-    <div class="form-group">
-        <label for="confirmPassword">Confirm Password</label>
-        <input class="form-control" type="password" name="confirmPassword" id="confirmPassword">
-    </div>
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input class="form-control" type="email" name="email" id="email">
-    </div>
-    <div class="form-group">
-        <input class="btn btn-primary" type="submit" value="Register">
-    </div>
-</form>
+<div class="container">
+    <h1 class="text-green text-center">Register</h1>
+    <hr>
+    <form action="/Users/Register" method="post">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input class="form-control" type="text" name="username" id="username" placeholder="Username...">
+            <br>
+            <label for="password">Password</label>
+            <input class="form-control" type="password" name="password" id="password" placeholder="Password...">
+            <br>
+            <label for="confirmPassword">Confirm Password</label>
+            <input class="form-control" type="password" name="confirmPassword" id="confirmPassword"
+                   placeholder="Confirm Password...">
+            <br>
+            <label for="email">Email</label>
+            <input class="form-control" type="email" name="email" id="email" placeholder="Email...">
+            <br>
+            <div class="text-center">
+                <input class="btn btn-green" type="submit" value="Register">
+            </div>
+        </div>
+    </form>
+</div>

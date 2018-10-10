@@ -1,0 +1,26 @@
+hr {
+    height: 2px;
+    border-color: green;
+}
+
+nav {
+    background-color: green;
+}
+
+.home-body {
+    background-color: green;
+    padding: 40px;
+}
+
+.text-orange {
+    color: orange;
+}
+
+.text-green {
+    color: green;
+}
+
+.btn-green {
+    background-color: green;
+    color: white;
+}

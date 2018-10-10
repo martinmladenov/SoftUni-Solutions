@@ -1,13 +1,22 @@
-<h1>Create Album</h1>
-<hr>
-<form action="/Albums/Create" method="post">
-    <div class="form-group">
-        <label for="name">Name</label>
-        <input class="form-control" type="text" name="name" id="name">
-    </div>
-    <div class="form-group">
-        <label for="cover">Cover</label>
-        <input class="form-control" type="text" name="cover" id="cover">
-    </div>
-    <input class="btn btn-primary" type="submit" value="Create">
-</form>
+<div class="container">
+    <h1 class="text-green text-center">Create Album</h1>
+    <hr>
+    <form action="/Albums/Create" method="post">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input class="form-control" type="text" name="name" id="name" placeholder="Name...">
+            <br>
+            <label for="cover">Cover</label>
+            <input class="form-control" type="password" name="cover" id="cover" placeholder="Cover...">
+            <hr>
+            <div class="row text-center">
+                <div class="col">
+                    <input class="btn btn-green" type="submit" value="Create">
+                </div>
+                <div class="col">
+                    <a class="btn btn-green" href="/Albums/All">Back to All</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

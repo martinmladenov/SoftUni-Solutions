@@ -1,18 +1,5 @@
-<div class="row">
-    <div class="col-md-6 col-sm-12">
-        <h1>Welcome, @Model.Username</h1>
-        <h3>IRunes wishes you a fun experience</h3>
-    </div>
-    <div class="col-md-6 col-sm-12">
-        <div class="card">
-            <img class="card-img-top" style="height: 180px; width: 100%; display: block; object-fit: cover;"
-                 src="@Model.AlbumCover" alt="@Model.AlbumName">
-            <div class="card-body">
-                <small class="text-muted">Featured Album</small>
-                <h5 class=card-title">@Model.AlbumName</h5>
-                <a href="/Albums/Details?id=@Model.AlbumId" class="btn btn-primary">View</a>
-                <a class="btn btn-secondary float-right" href="/Albums/All">All Albums</a>
-            </div>
-        </div>
-    </div>
+<div class="container-fluid home-body rounded">
+    <h1 class="text-white">Welcome, <span class="text-orange">@Model.Username</span></h1>
+    <hr>
+    <h2 class="text-white">IRunes wishes you a fun experience</h2>
 </div>

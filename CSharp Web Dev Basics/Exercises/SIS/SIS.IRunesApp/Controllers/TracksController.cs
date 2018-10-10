@@ -2,33 +2,32 @@ namespace SIS.IRunesApp.Controllers
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using Data.Models;
-    using Extensions;
     using HTTP.Enums;
-    using HTTP.Requests;
     using HTTP.Responses;
-    using Microsoft.EntityFrameworkCore;
+    using MvcFramework;
+    using MvcFramework.Extensions;
 
     public class TracksController : BaseController
     {
-        public IHttpResponse Create(IHttpRequest request)
+        [HttpGet("/Tracks/Create")]
+        public IHttpResponse Create()
         {
-            if (!request.IsLoggedIn())
+            if (!this.Request.IsLoggedIn())
             {
                 return this.Redirect("/Users/Login");
             }
 
-            if (!request.QueryData.ContainsKey("albumId"))
+            if (!this.Request.QueryData.ContainsKey("albumId"))
             {
-                return this.Error("No album id specified", HttpResponseStatusCode.BadRequest, request);
+                return this.Error("No album id specified", HttpResponseStatusCode.BadRequest);
             }
 
-            var albumId = (string) request.QueryData["albumId"];
+            var albumId = (string) this.Request.QueryData["albumId"];
 
             if (!this.Db.Albums.Any(a => a.Id == albumId))
             {
-                return this.Error("Album not found", HttpResponseStatusCode.NotFound, request);
+                return this.Error("Album not found", HttpResponseStatusCode.NotFound);
             }
 
             var viewBag = new Dictionary<string, string>
@@ -36,44 +35,45 @@ namespace SIS.IRunesApp.Controllers
                 {"AlbumId", albumId}
             };
 
-            return this.View("Tracks/Create", request, viewBag);
+            return this.View("Tracks/Create", viewBag);
         }
 
-        public IHttpResponse DoCreate(IHttpRequest request)
+        [HttpPost("/Tracks/Create")]
+        public IHttpResponse DoCreate()
         {
-            if (!request.IsLoggedIn())
+            if (!this.Request.IsLoggedIn())
             {
                 return this.Redirect("/Users/Login");
             }
 
-            if (!request.QueryData.ContainsKey("albumId"))
+            if (!this.Request.QueryData.ContainsKey("albumId"))
             {
-                return this.Error("No album id specified", HttpResponseStatusCode.BadRequest, request);
+                return this.Error("No album id specified", HttpResponseStatusCode.BadRequest);
             }
 
-            string name = (string) request.FormData["name"];
-            string link = (string) request.FormData["link"];
-            string priceStr = (string) request.FormData["price"];
+            string name = (string) this.Request.FormData["name"];
+            string link = (string) this.Request.FormData["link"];
+            string priceStr = (string) this.Request.FormData["price"];
 
             if (string.IsNullOrWhiteSpace(name) ||
                 string.IsNullOrWhiteSpace(link) ||
                 string.IsNullOrWhiteSpace(priceStr))
             {
-                return this.Error("Name, link and price cannot be empty", HttpResponseStatusCode.BadRequest, request);
+                return this.Error("Name, link and price cannot be empty", HttpResponseStatusCode.BadRequest);
             }
 
             if (!decimal.TryParse(priceStr, out decimal price))
             {
-                return this.Error("Invalid price", HttpResponseStatusCode.BadRequest, request);
+                return this.Error("Invalid price", HttpResponseStatusCode.BadRequest);
             }
 
-            var albumId = (string) request.QueryData["albumId"];
+            var albumId = (string) this.Request.QueryData["albumId"];
 
             Album album = this.Db.Albums.FirstOrDefault(a => a.Id == albumId);
 
             if (album == null)
             {
-                return this.Error("Album not found", HttpResponseStatusCode.NotFound, request);
+                return this.Error("Album not found", HttpResponseStatusCode.NotFound);
             }
 
             Track track = new Track
@@ -90,25 +90,26 @@ namespace SIS.IRunesApp.Controllers
             return this.Redirect("/Albums/Details?id=" + albumId);
         }
 
-        public IHttpResponse Details(IHttpRequest request)
+        [HttpGet("/Tracks/Details")]
+        public IHttpResponse Details()
         {
-            if (!request.IsLoggedIn())
+            if (!this.Request.IsLoggedIn())
             {
                 return this.Redirect("/Users/Login");
             }
 
-            if (!request.QueryData.ContainsKey("id"))
+            if (!this.Request.QueryData.ContainsKey("id"))
             {
-                return this.Error("No track id specified", HttpResponseStatusCode.BadRequest, request);
+                return this.Error("No track id specified", HttpResponseStatusCode.BadRequest);
             }
 
-            var trackId = (string) request.QueryData["id"];
+            var albumId = (string) this.Request.QueryData["id"];
 
-            Track track = this.Db.Tracks.Include(t => t.Album).FirstOrDefault(a => a.Id == trackId);
+            Track track = this.Db.Tracks.FirstOrDefault(a => a.Id == albumId);
 
             if (track == null)
             {
-                return this.Error("Track not found", HttpResponseStatusCode.NotFound, request);
+                return this.Error("Track not found", HttpResponseStatusCode.NotFound);
             }
 
             var viewBag = new Dictionary<string, string>
@@ -116,11 +117,10 @@ namespace SIS.IRunesApp.Controllers
                 {"Name", track.Name},
                 {"Link", track.Link},
                 {"AlbumId", track.AlbumId},
-                {"Price", track.Price.ToString("F2")},
-                {"AlbumName", track.Album.Name}
+                {"Price", track.Price.ToString("F2")}
             };
 
-            return this.View("Tracks/Details", request, viewBag);
+            return this.View("Tracks/Details", viewBag);
         }
     }
 }

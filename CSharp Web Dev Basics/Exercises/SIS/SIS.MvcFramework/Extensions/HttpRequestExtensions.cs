@@ -1,4 +1,4 @@
-namespace SIS.IRunesApp.Extensions
+namespace SIS.MvcFramework.Extensions
 {
     using HTTP.Requests;
 

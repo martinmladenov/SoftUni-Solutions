@@ -4,41 +4,38 @@ namespace SIS.IRunesApp.Controllers
     using System.Linq;
     using System.Text;
     using Data.Models;
-    using Extensions;
     using HTTP.Enums;
     using HTTP.Requests;
     using HTTP.Responses;
     using Microsoft.EntityFrameworkCore;
+    using MvcFramework;
+    using MvcFramework.Extensions;
 
     public class AlbumsController : BaseController
     {
-        public IHttpResponse All(IHttpRequest request)
+        [HttpGet("/Albums/All")]
+        public IHttpResponse All()
         {
-            if (!request.IsLoggedIn())
+            if (!this.Request.IsLoggedIn())
             {
                 return this.Redirect("/Users/Login");
             }
 
             StringBuilder sb = new StringBuilder();
 
-            var albums = this.Db.Albums.Include(a => a.Tracks).ToArray();
+            var albums = this.Db.Albums.ToArray();
 
             if (albums.Length > 0)
             {
                 foreach (var album in albums)
                 {
-                    sb.AppendLine($@"
-                    <div class=""col-md-4 col-sm-12"" style=""margin-bottom: 25px;"">
-                    <div class=""card"">
-                    <img class=""card-img-top"" style=""height: 180px; width: 100%; display: block; object-fit: cover;""
-                    src=""{album.Cover}"" alt=""{album.Name}"">
-                    <div class=""card-body"">
-                    <h5 class=""card-title"">{album.Name}</h5>
-                    <p class=""card-text"">${album.Price:F2}</p>
-                    <a href=""/Albums/Details?id={album.Id}"" class=""btn btn-primary"">View</a>
-                    </div>
-                    </div>
-                    </div>");
+                    Dictionary<string, string> templateBag = new Dictionary<string, string>()
+                    {
+                        {"Id", album.Id},
+                        {"Name", album.Name}
+                    };
+
+                    sb.AppendLine(this.GetTemplate("AllAlbumsTemplate", templateBag));
                 }
             }
             else
@@ -51,33 +48,35 @@ namespace SIS.IRunesApp.Controllers
                 {"Albums", sb.ToString()}
             };
 
-            return this.View("Albums/All", request, viewBag);
+            return this.View("Albums/All", viewBag);
         }
 
-        public IHttpResponse Create(IHttpRequest request)
+        [HttpGet("/Albums/Create")]
+        public IHttpResponse Create()
         {
-            if (!request.IsLoggedIn())
+            if (!this.Request.IsLoggedIn())
             {
                 return this.Redirect("/Users/Login");
             }
 
-            return this.View("Albums/Create", request);
+            return this.View("Albums/Create");
         }
 
-        public IHttpResponse DoCreate(IHttpRequest request)
+        [HttpPost("/Albums/Create")]
+        public IHttpResponse DoCreate()
         {
-            if (!request.IsLoggedIn())
+            if (!this.Request.IsLoggedIn())
             {
                 return this.Redirect("/Users/Login");
             }
 
-            string name = (string) request.FormData["name"];
-            string cover = (string) request.FormData["cover"];
+            string name = (string) this.Request.FormData["name"];
+            string cover = (string) this.Request.FormData["cover"];
 
             if (string.IsNullOrWhiteSpace(name) ||
                 string.IsNullOrWhiteSpace(cover))
             {
-                return this.Error("Name and cover cannot be empty", HttpResponseStatusCode.BadRequest, request);
+                return this.Error("Name and cover cannot be empty", HttpResponseStatusCode.BadRequest);
             }
 
             Album album = new Album
@@ -92,19 +91,20 @@ namespace SIS.IRunesApp.Controllers
             return this.Redirect("/Albums/All");
         }
 
-        public IHttpResponse Details(IHttpRequest request)
+        [HttpGet("/Albums/Details")]
+        public IHttpResponse Details()
         {
-            if (!request.IsLoggedIn())
+            if (!this.Request.IsLoggedIn())
             {
                 return this.Redirect("/Users/Login");
             }
 
-            if (!request.QueryData.ContainsKey("id"))
+            if (!this.Request.QueryData.ContainsKey("id"))
             {
-                return this.Error("No album id specified", HttpResponseStatusCode.BadRequest, request);
+                return this.Error("No album id specified", HttpResponseStatusCode.BadRequest);
             }
 
-            var albumId = (string) request.QueryData["id"];
+            var albumId = (string) this.Request.QueryData["id"];
 
             Album album = this.Db.Albums
                 .Include(a => a.Tracks)
@@ -112,17 +112,24 @@ namespace SIS.IRunesApp.Controllers
 
             if (album == null)
             {
-                return this.Error("Album not found", HttpResponseStatusCode.NotFound, request);
+                return this.Error("Album not found", HttpResponseStatusCode.NotFound);
             }
 
             StringBuilder sb = new StringBuilder();
 
-            if (album.Tracks.ToArray().Length > 0)
+            var tracks = album.Tracks.ToArray();
+
+            if (tracks.Length > 0)
             {
-                foreach (var track in album.Tracks)
+                foreach (var track in tracks)
                 {
-                    sb.AppendLine("<a class=\"list-group-item list-group-item-action\" href=\"/Tracks/Details?" +
-                                  $"id={track.Id}\">{track.Name}</a>");
+                    var templateBag = new Dictionary<string, string>
+                    {
+                        {"Id", track.Id},
+                        {"Name", track.Name}
+                    };
+
+                    sb.AppendLine(this.GetTemplate("SongInAlbumTemplate", templateBag));
                 }
             }
             else
@@ -139,7 +146,7 @@ namespace SIS.IRunesApp.Controllers
                 {"AlbumId", albumId}
             };
 
-            return this.View("Albums/Details", request, viewBag);
+            return this.View("Albums/Details", viewBag);
         }
     }
 }

@@ -1,45 +1,25 @@
 namespace SIS.IRunesApp.Controllers
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using Data.Models;
-    using Extensions;
-    using HTTP.Requests;
     using HTTP.Responses;
+    using MvcFramework;
+    using MvcFramework.Extensions;
 
     public class HomeController : BaseController
     {
-        public IHttpResponse Index(IHttpRequest request)
+        [HttpGet("/")]
+        public IHttpResponse Index()
         {
-            if (!request.IsLoggedIn())
+            if (!this.Request.IsLoggedIn())
             {
-                return this.View("Home/IndexLoggedOut", request);
-            }
-
-            Album randomAlbum = this.Db.Albums.OrderBy(a => Guid.NewGuid()).FirstOrDefault();
-
-            var albumCover = string.Empty;
-
-            var albumName = string.Empty;
-
-            var albumId = string.Empty;
-
-            if (randomAlbum != null)
-            {
-                albumCover = randomAlbum.Cover;
-                albumName = randomAlbum.Name;
-                albumId = randomAlbum.Id;
+                return this.View("Home/IndexLoggedOut");
             }
 
             var dict = new Dictionary<string, string>
             {
-                {"Username", request.GetUsername()},
-                {"AlbumCover", albumCover},
-                {"AlbumName", albumName},
-                {"AlbumId", albumId}
+                {"Username", this.Request.GetUsername()}
             };
-            return this.View("Home/IndexLoggedIn", request, dict);
+            return this.View("Home/IndexLoggedIn", dict);
 
         }
     }

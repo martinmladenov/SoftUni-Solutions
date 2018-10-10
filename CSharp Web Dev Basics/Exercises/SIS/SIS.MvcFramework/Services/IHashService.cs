@@ -1,4 +1,4 @@
-namespace SIS.IRunesApp.Services
+namespace SIS.MvcFramework.Services
 {
     public interface IHashService
     {

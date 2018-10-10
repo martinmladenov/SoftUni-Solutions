@@ -1,9 +1,11 @@
 ﻿namespace SIS.WebServer
 {
     using System;
+    using System.IO;
     using System.Net.Sockets;
     using System.Reflection.Emit;
     using System.Text;
+    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using HTTP.Cookies;
     using HTTP.Enums;
@@ -63,10 +65,24 @@
             if (!this.serverRoutingTable.Routes.ContainsKey(httpRequest.RequestMethod)
                 || !this.serverRoutingTable.Routes[httpRequest.RequestMethod].ContainsKey(httpRequest.Path))
             {
-                return new HtmlResult("<h1>404 Not Found</h1>", HttpResponseStatusCode.NotFound);
+                return this.ReturnIfResource(httpRequest.Path);
             }
 
             return this.serverRoutingTable.Routes[httpRequest.RequestMethod][httpRequest.Path].Invoke(httpRequest);
+        }
+
+        private IHttpResponse ReturnIfResource(string httpRequestPath)
+        {
+            string path = "Resources/" + httpRequestPath;
+            
+            if (path.Contains("..") || !File.Exists(path))
+            {
+                return new HtmlResult("<h1>404 Not Found</h1>", HttpResponseStatusCode.NotFound);
+            }
+
+            byte[] content = File.ReadAllBytes(path);
+            
+            return new InlineResourceResult(content, HttpResponseStatusCode.Ok);
         }
 
         private string SetRequestSession(IHttpRequest httpRequest)

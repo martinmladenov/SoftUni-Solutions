@@ -1,11 +1,10 @@
-<h1>@Model.Name</h1>
-<a class="text-muted" href="/Albums/Details?id=@Model.AlbumId">@Model.AlbumName</a>
-<hr>
-<div class="row">
-    <div class="embed-responsive embed-responsive-16by9 col-md-8 col-sm-12">
-        <iframe type="text/html" src="@Model.Link" frameborder="0" allowfullscreen></iframe>
+<div class="container text-center">
+    <h2>Name: @Model.Name</h2>
+    <h2>Price: $@Model.Price</h2>
+    <hr>
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" type="text/html" src="@Model.Link" frameborder="0"></iframe>
     </div>
-    <h3 class="col-md-4 col-sm-12 text-right">Price: $@Model.Price</h3>
+    <hr>
+    <a class="btn btn-green" href="/Albums/Details?id=@Model.AlbumId">Back to Album</a>
 </div>
-<hr>
-<a class="btn btn-secondary" href="/Albums/Details?id=@Model.AlbumId">Back to Album</a>
