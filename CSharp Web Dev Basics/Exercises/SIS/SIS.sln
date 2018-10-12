@@ -6,8 +6,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIS.WebServer", "SIS.WebSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIS.IRunesApp", "SIS.IRunesApp\SIS.IRunesApp.csproj", "{8B3F4F88-8987-4951-A0E8-B9E0C802BE7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIS.MvcFramework", "SIS.MvcFramework\SIS.MvcFramework.csproj", "{B23214C6-C45A-478F-9D97-86832E58F070}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,9 +24,5 @@ Global
 		{8B3F4F88-8987-4951-A0E8-B9E0C802BE7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B3F4F88-8987-4951-A0E8-B9E0C802BE7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B3F4F88-8987-4951-A0E8-B9E0C802BE7B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B23214C6-C45A-478F-9D97-86832E58F070}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B23214C6-C45A-478F-9D97-86832E58F070}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B23214C6-C45A-478F-9D97-86832E58F070}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B23214C6-C45A-478F-9D97-86832E58F070}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

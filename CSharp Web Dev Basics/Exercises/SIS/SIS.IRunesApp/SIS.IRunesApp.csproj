@@ -13,12 +13,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\SIS.HTTP\SIS.HTTP.csproj" />
-        <ProjectReference Include="..\SIS.MvcFramework\SIS.MvcFramework.csproj" />
         <ProjectReference Include="..\SIS.WebServer\SIS.WebServer.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Content Include="Views\Users\Register.html" />
     </ItemGroup>
 
 </Project>
