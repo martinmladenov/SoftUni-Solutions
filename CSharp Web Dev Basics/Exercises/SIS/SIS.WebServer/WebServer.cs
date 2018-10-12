@@ -4,9 +4,9 @@
     using System.Net;
     using System.Net.Sockets;
     using System.Threading.Tasks;
-    using Routing;
+    using Api;
 
-    public class Server
+    public class WebServer
     {
         private const string LocalhostIpAddress = "127.0.0.1";
 
@@ -14,16 +14,16 @@
 
         private readonly TcpListener listener;
 
-        private readonly ServerRoutingTable serverRoutingTable;
+        private readonly IHttpHandler handler;
 
         private bool isRunning;
 
-        public Server(int port, ServerRoutingTable serverRoutingTable)
+        public WebServer(int port, IHttpHandler handler)
         {
             this.port = port;
             this.listener = new TcpListener(IPAddress.Parse(LocalhostIpAddress), port);
 
-            this.serverRoutingTable = serverRoutingTable;
+            this.handler = handler;
         }
 
         public void Run()
@@ -52,7 +52,7 @@
 
         public async Task ProcessClientAsync(Socket client)
         {
-            var connectionHandler = new ConnectionHandler(client, this.serverRoutingTable);
+            var connectionHandler = new ConnectionHandler(client, this.handler);
             await connectionHandler.ProcessRequestAsync();
         }
     }

@@ -2,11 +2,12 @@ namespace SIS.WebServer.Routing
 {
     using System;
     using System.Collections.Generic;
+    using Api;
     using HTTP.Enums;
     using HTTP.Requests;
     using HTTP.Responses;
 
-    public class ServerRoutingTable
+    public class ServerRoutingTable : IHttpHandler
     {
         public ServerRoutingTable()
         {
@@ -20,10 +21,16 @@ namespace SIS.WebServer.Routing
         }
 
         public Dictionary<HttpRequestMethod, Dictionary<string, Func<IHttpRequest, IHttpResponse>>> Routes { get; }
-        
-        public void Add(HttpRequestMethod method, string path, Func<IHttpRequest, IHttpResponse> func)
+
+        public IHttpResponse Handle(IHttpRequest request)
         {
-            this.Routes[method].Add(path, func);
+            if (!this.Routes.ContainsKey(request.RequestMethod)
+                || this.Routes[request.RequestMethod].ContainsKey(request.Path))
+            {
+                return null;
+            }
+
+            return this.Routes[request.RequestMethod][request.Path].Invoke(request);
         }
     }
 }

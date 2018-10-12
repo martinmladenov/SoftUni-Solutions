@@ -3,10 +3,9 @@
     using System;
     using System.IO;
     using System.Net.Sockets;
-    using System.Reflection.Emit;
     using System.Text;
-    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
+    using Api;
     using HTTP.Cookies;
     using HTTP.Enums;
     using HTTP.Exceptions;
@@ -14,18 +13,17 @@
     using HTTP.Responses;
     using HTTP.Sessions;
     using Results;
-    using Routing;
 
     public class ConnectionHandler
     {
         private readonly Socket client;
 
-        private readonly ServerRoutingTable serverRoutingTable;
+        private readonly IHttpHandler handler;
 
-        public ConnectionHandler(Socket client, ServerRoutingTable serverRoutingTable)
+        public ConnectionHandler(Socket client, IHttpHandler handler)
         {
             this.client = client;
-            this.serverRoutingTable = serverRoutingTable;
+            this.handler = handler;
         }
 
         private async Task<IHttpRequest> ReadRequest()
@@ -62,13 +60,14 @@
 
         private IHttpResponse HandleRequest(IHttpRequest httpRequest)
         {
-            if (!this.serverRoutingTable.Routes.ContainsKey(httpRequest.RequestMethod)
-                || !this.serverRoutingTable.Routes[httpRequest.RequestMethod].ContainsKey(httpRequest.Path))
+            var response = this.handler.Handle(httpRequest);
+
+            if (response == null)
             {
-                return this.ReturnIfResource(httpRequest.Path);
+                response = this.ReturnIfResource(httpRequest.Path);
             }
 
-            return this.serverRoutingTable.Routes[httpRequest.RequestMethod][httpRequest.Path].Invoke(httpRequest);
+            return response;
         }
 
         private IHttpResponse ReturnIfResource(string httpRequestPath)
