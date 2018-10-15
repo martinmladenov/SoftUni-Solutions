@@ -18,12 +18,12 @@
     {
         private readonly Socket client;
 
-        private readonly IHttpHandler handler;
+        private readonly IHttpHandler[] handlers;
 
-        public ConnectionHandler(Socket client, IHttpHandler handler)
+        public ConnectionHandler(Socket client, params IHttpHandler[] handlers)
         {
             this.client = client;
-            this.handler = handler;
+            this.handlers = handlers;
         }
 
         private async Task<IHttpRequest> ReadRequest()
@@ -60,28 +60,17 @@
 
         private IHttpResponse HandleRequest(IHttpRequest httpRequest)
         {
-            var response = this.handler.Handle(httpRequest);
-
-            if (response == null)
+            foreach (var handler in this.handlers)
             {
-                response = this.ReturnIfResource(httpRequest.Path);
+                var response = handler.Handle(httpRequest);
+
+                if (response != null)
+                {
+                    return response;
+                }
             }
 
-            return response;
-        }
-
-        private IHttpResponse ReturnIfResource(string httpRequestPath)
-        {
-            string path = "Resources/" + httpRequestPath;
-            
-            if (path.Contains("..") || !File.Exists(path))
-            {
-                return new HtmlResult("<h1>404 Not Found</h1>", HttpResponseStatusCode.NotFound);
-            }
-
-            byte[] content = File.ReadAllBytes(path);
-            
-            return new InlineResourceResult(content, HttpResponseStatusCode.Ok);
+            return new HtmlResult("<h1>404 Not Found</h1>", HttpResponseStatusCode.NotFound);
         }
 
         private string SetRequestSession(IHttpRequest httpRequest)
@@ -97,7 +86,7 @@
             {
                 sessionId = Guid.NewGuid().ToString();
             }
-            
+
             httpRequest.Session = HttpSessionStorage.GetSession(sessionId);
 
             return sessionId;
@@ -119,11 +108,11 @@
                 if (httpRequest != null)
                 {
                     string sessionId = this.SetRequestSession(httpRequest);
-                    
+
                     var httpResponse = this.HandleRequest(httpRequest);
 
                     this.SetResponseSession(httpResponse, sessionId);
-                    
+
                     await this.PrepareResponse(httpResponse);
                 }
             }

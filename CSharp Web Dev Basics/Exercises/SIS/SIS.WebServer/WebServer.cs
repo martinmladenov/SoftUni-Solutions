@@ -14,16 +14,16 @@
 
         private readonly TcpListener listener;
 
-        private readonly IHttpHandler handler;
+        private readonly IHttpHandler[] handlers;
 
         private bool isRunning;
 
-        public WebServer(int port, IHttpHandler handler)
+        public WebServer(int port, params IHttpHandler[] handlers)
         {
             this.port = port;
             this.listener = new TcpListener(IPAddress.Parse(LocalhostIpAddress), port);
 
-            this.handler = handler;
+            this.handlers = handlers;
         }
 
         public void Run()
@@ -34,9 +34,6 @@
 
             Console.WriteLine($"Server started at http://{LocalhostIpAddress}:{this.port}/");
 
-            //// var task = Task.Run(() => this.ListenLoop());
-            //// task.Wait();
-            
             this.ListenLoop();
         }
 
@@ -52,7 +49,7 @@
 
         public async Task ProcessClientAsync(Socket client)
         {
-            var connectionHandler = new ConnectionHandler(client, this.handler);
+            var connectionHandler = new ConnectionHandler(client, this.handlers);
             await connectionHandler.ProcessRequestAsync();
         }
     }
