@@ -23,10 +23,11 @@ namespace SIS.Framework.Views
 
         public string Render()
         {
-            var html = this.ReadFile();
-            string rendered = this.RenderHtml(html);
+            var layoutHtml = this.RenderHtml(File.ReadAllText("./Views/_Layout.html"));
 
-            return rendered;
+            string rendered = this.RenderHtml(this.ReadFile());
+
+            return layoutHtml.Replace("@RenderBody()", rendered);
         }
 
         private string RenderHtml(string html)
