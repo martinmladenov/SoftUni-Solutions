@@ -12,11 +12,19 @@ namespace SIS.Framework.Routers
     using HTTP.Extensions;
     using HTTP.Requests;
     using HTTP.Responses;
+    using Services;
     using WebServer.Api;
     using WebServer.Results;
 
     public class ControllerRouter : IHttpHandler
     {
+        private IDependencyContainer dependencyContainer;
+
+        public ControllerRouter(IDependencyContainer dependencyContainer)
+        {
+            this.dependencyContainer = dependencyContainer;
+        }
+
         private Controller GetController(string controllerName)
         {
             if (string.IsNullOrWhiteSpace(controllerName))
@@ -37,7 +45,7 @@ namespace SIS.Framework.Routers
                 return null;
             }
 
-            var controller = (Controller) Activator.CreateInstance(controllerType);
+            var controller = (Controller) this.dependencyContainer.CreateInstance(controllerType);
 
             return controller;
         }
@@ -109,7 +117,7 @@ namespace SIS.Framework.Routers
             string controllerName;
             string actionName;
 
-            if (request.Url == "/")
+            if (request.Path == "/")
             {
                 controllerName = "Home";
                 actionName = "Index";
