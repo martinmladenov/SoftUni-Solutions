@@ -6,6 +6,7 @@ namespace SIS.Framework.Routers
     using System.Linq;
     using System.Reflection;
     using ActionResults;
+    using Attributes.Action;
     using Attributes.Methods;
     using Controllers;
     using HTTP.Enums;
@@ -146,11 +147,12 @@ namespace SIS.Framework.Routers
                 return null;
             }
 
+            controller.Request = request;
+
             object[] actionParameters = this.MapActionParameters(controller, action, request);
 
-            IActionResult result = this.InvokeAction(controller, action, actionParameters);
-
-            return this.PrepareResponse(result);
+            return this.Authorize(controller, action) ??
+                   this.PrepareResponse(this.InvokeAction(controller, action, actionParameters));
         }
 
         private IActionResult InvokeAction(Controller controller, MethodInfo action, object[] actionParams)
@@ -252,6 +254,19 @@ namespace SIS.Framework.Routers
             }
 
             return Convert.ChangeType(bindingModelInstance, bindingModelType);
+        }
+
+        private IHttpResponse Authorize(Controller controller, MethodInfo action)
+        {
+            if (action.GetCustomAttributes()
+                .Where(a => a is AuthorizeAttribute)
+                .Cast<AuthorizeAttribute>()
+                .Any(a => !a.IsAuthorized(controller.Identity)))
+            {
+                return new UnauthorizedResult();
+            }
+
+            return null;
         }
     }
 }

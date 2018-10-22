@@ -4,6 +4,7 @@ namespace SIS.Framework.Controllers
     using ActionResults;
     using HTTP.Requests;
     using Models;
+    using Security;
     using Utilities;
     using Views;
 
@@ -17,6 +18,9 @@ namespace SIS.Framework.Controllers
         protected ViewModel Model { get; }
 
         public Model ModelState { get; } = new Model();
+
+        public IIdentity Identity
+            => (IIdentity) this.Request.Session.GetParameter("auth");
 
         public IHttpRequest Request { get; set; }
 
@@ -33,5 +37,15 @@ namespace SIS.Framework.Controllers
 
         protected IRedirectable RedirectToAction(string redirectUrl)
             => new RedirectResult(redirectUrl);
+
+        protected void SignIn(IIdentity auth)
+        {
+            this.Request.Session.AddParameter("auth", auth);
+        }
+
+        protected void SignOut()
+        {
+            this.Request.Session.ClearParameters();
+        }
     }
 }
