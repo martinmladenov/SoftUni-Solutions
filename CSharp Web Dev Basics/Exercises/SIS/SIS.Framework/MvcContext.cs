@@ -1,21 +1,23 @@
 namespace SIS.Framework
 {
+    using System.Reflection;
+
     public class MvcContext
     {
         private static MvcContext instance;
 
-        private MvcContext() { }
+        private MvcContext()
+        {
+        }
 
         public static MvcContext Get => instance ?? (instance = new MvcContext());
-        
-        public string AssemblyName { get; set; }
-        
-        public string ControllersFolder { get; set; }
 
-        public string ControllerSuffix { get; set; }
+        public string AssemblyName { get; } = Assembly.GetEntryAssembly().GetName().Name;
 
-        public string ViewsFolder { get; set; }
+        public string ControllersFolder { get; } = "Controllers";
 
-        public string ModelsFolder { get; set; }
+        public string ControllerSuffix { get; } = "Controller";
+
+        public string ViewsFolder { get; } = "Views";
     }
 }

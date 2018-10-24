@@ -1,7 +1,5 @@
 namespace SIS.Framework.Views
 {
-    using System.Collections.Generic;
-    using System.IO;
     using ActionResults;
 
     public class View : IRenderable
