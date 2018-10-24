@@ -1,5 +1,7 @@
 namespace SIS.Framework.Controllers
 {
+    using System;
+    using System.IO;
     using System.Runtime.CompilerServices;
     using ActionResults;
     using HTTP.Requests;
@@ -19,20 +21,33 @@ namespace SIS.Framework.Controllers
 
         public Model ModelState { get; } = new Model();
 
+        private ViewEngine ViewEngine { get; } = new ViewEngine();
+
         public IIdentity Identity
             => (IIdentity) this.Request.Session.GetParameter("auth");
 
         public IHttpRequest Request { get; set; }
 
-        protected IViewable View([CallerMemberName] string caller = "")
+        protected IViewable View([CallerMemberName] string actionName = "")
         {
             var controllerName = ControllerUtilities.GetControllerName(this);
 
-            var fullyQualifiedName = ControllerUtilities.GetViewFullyQualifiedName(controllerName, caller);
+            string viewContent;
 
-            var view = new View(fullyQualifiedName, this.Model.Data);
+            try
+            {
+                viewContent = this.ViewEngine.GetViewContent(controllerName, actionName);
+            }
+            catch (FileNotFoundException e)
+            {
+                this.Model.Data["Error"] = e.Message;
 
-            return new ViewResult(view);
+                viewContent = this.ViewEngine.GetErrorContent();
+            }
+
+            string renderedContent = this.ViewEngine.RenderHtml(viewContent, this.Model.Data);
+
+            return new ViewResult(new View(renderedContent));
         }
 
         protected IRedirectable RedirectToAction(string redirectUrl)

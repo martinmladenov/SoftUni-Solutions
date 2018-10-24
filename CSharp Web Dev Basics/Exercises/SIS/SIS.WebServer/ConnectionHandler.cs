@@ -3,6 +3,7 @@
     using System;
     using System.IO;
     using System.Net.Sockets;
+    using System.Reflection;
     using System.Text;
     using System.Threading.Tasks;
     using Api;
@@ -120,6 +121,12 @@
             {
                 await this.PrepareResponse(new HtmlResult($"<h1>400 Bad Request</h1><p>{e.Message}</p>",
                     HttpResponseStatusCode.BadRequest));
+            }
+            catch (TargetInvocationException e)
+            {
+                await this.PrepareResponse(new HtmlResult(
+                    $"<h1>500 Internal Server Error</h1><h2>{e.InnerException.GetType().Name}</h2><p>{e.InnerException.Message}</p>",
+                    HttpResponseStatusCode.InternalServerError));
             }
             catch (Exception e)
             {
