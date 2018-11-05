@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\SIS.Framework\SIS.Framework.csproj" />
+    <ProjectReference Include="..\PANDA.Data\PANDA.Data.csproj" />
+    <ProjectReference Include="..\PANDA.Models\PANDA.Models.csproj" />
+  </ItemGroup>
+
+</Project>
