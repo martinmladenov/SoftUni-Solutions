@@ -1,0 +1,72 @@
+﻿@using Chushka.Infrastructure
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>CHUSHKA</title>
+    <link rel="stylesheet" href="~/css/reset-css.css">
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+<div class="container-fluid">
+    <header>
+        <nav class="navbar navbar-expand-lg chushka-bg-color">
+            <a class="navbar-brand text-white" asp-controller="Home" asp-action="Index">CHUSHKA</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                        </li>
+                    }
+                    else if (User.IsInRole(GlobalConstants.AdminRoleName))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-controller="Products" asp-action="Create">Create Product</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-controller="Orders" asp-action="All">All Orders</a>
+                        </li>
+                    }
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home")" method="post" id="logoutForm">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+                            </li>
+                        </form>
+                    }
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    @RenderBody()
+
+    <footer>
+        <div class="container-fluid chushka-bg-color">
+            <div class="text-white p-2 text-center">
+                &copy; CopyRight Sanity Web Design Studios 2018. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

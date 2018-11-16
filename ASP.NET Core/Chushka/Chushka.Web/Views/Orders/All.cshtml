@@ -1,0 +1,34 @@
+﻿@model IEnumerable<OrderListViewModel>
+
+<main class="mt-3 mb-5">
+    <h1 class="text-center">Following</h1>
+    <hr class="hr-2 bg-dark"/>
+    <table class="table w-75 mx-auto table-hover">
+        <thead>
+        <tr class="row">
+            <th class="col-md-1">#</th>
+            <th class="col-md-4">Order Id</th>
+            <th class="col-md-2">Customer</th>
+            <th class="col-md-2">Product</th>
+            <th class="col-md-3">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @{
+            var orders = Model as OrderListViewModel[] ?? Model.ToArray();
+        }
+        @for (int i = 0; i < orders.Length; i++)
+        {
+            var m = orders[i];
+
+            <tr class="row">
+                <th class="col-md-1">@(i + 1)</th>
+                <td class="col-md-4">@m.Id</td>
+                <td class="col-md-2">@m.Customer</td>
+                <td class="col-md-2">@m.Product</td>
+                <td class="col-md-3">@m.OrderedOn</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</main>

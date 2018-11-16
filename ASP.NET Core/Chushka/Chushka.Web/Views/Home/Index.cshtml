@@ -1,0 +1,52 @@
+﻿@using Chushka.Infrastructure
+@model IEnumerable<ProductListViewModel>
+
+<main class="mt-3 mb-5">
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <div class="jumbotron chushka-bg-color">
+            <h1>Welcome to Chushka Universal Web Shop</h1>
+            <hr class="bg-white"/>
+            <h3><a class="nav-link-dark" asp-area="Identity" asp-page="/Account/Login">Login</a> if you have an account.</h3>
+            <h3><a class="nav-link-dark" asp-area="Identity" asp-page="/Account/Register">Register</a> if you don't.</h3>
+        </div>
+    }
+    else
+    {
+        <div>
+            <h2 class="text-center">Greetings, @User.Identity.Name</h2>
+
+            @if (User.IsInRole(GlobalConstants.AdminRoleName))
+            {
+                <h4 class="text-center">Enjoy your work today!</h4>
+            }
+            else
+            {
+                <h4 class="text-center">Feel free to view and order any of our products.</h4>
+            }
+
+            <hr class="hr-2 bg-dark">
+
+            <div class="row justify-content-center">
+                @foreach (var m in Model)
+                {
+                    <div class="col-5ths">
+
+                        <div class="chushka-bg-color text-center rounded m-3">
+                            <a class="no-underline"asp-controller="Products" asp-action="Details" asp-route-id="@m.Id">
+                                <div class="text-white px-5 py-3">
+                                    <h5>@m.Name</h5>
+                                    <hr class="hr-2 bg-white">
+                                    <div class="index-description">@m.Description</div>
+                                    <hr class="hr-2 bg-white">
+                                    <h5>$@m.Price</h5>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+    }
+</main>

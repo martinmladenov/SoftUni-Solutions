@@ -1,0 +1,32 @@
+@page
+@model RegisterModel
+
+<main class="mt-3">
+    <h1 class="text-center">Register</h1>
+    <hr class="bg-secondary half-width"/>
+    <form class="mx-auto half-width" method="post">
+        <div class="form-group">
+            <label asp-for="Input.Username"></label>
+            <input class="form-control" asp-for="Input.Username" placeholder="Username...">
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.Password"></label>
+            <input class="form-control" asp-for="Input.Password" placeholder="Password...">
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.ConfirmPassword"></label>
+            <input class="form-control" asp-for="Input.ConfirmPassword" placeholder="Confirm Password...">
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.FullName"></label>
+            <input class="form-control" asp-for="Input.FullName" placeholder="Full Name...">
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.Email"></label>
+            <input class="form-control" asp-for="Input.Email" placeholder="Email...">
+        </div>
+        <div class="button-holder d-flex justify-content-center">
+            <button type="submit" class="btn chushka-bg-color">Register</button>
+        </div>
+    </form>
+</main>
