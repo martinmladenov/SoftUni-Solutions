@@ -44,7 +44,7 @@
         <div class="row">
             <div class="col-6 form-group">
                 <label asp-for="TotalTickets"></label>
-                <input class="form-control" asp-for="TotalTickets" placeholder="@Html.DisplayNameFor(d => d.TotalTickets)..."/>
+                <input class="form-control" min="1" asp-for="TotalTickets" placeholder="@Html.DisplayNameFor(d => d.TotalTickets)..."/>
                 <span asp-validation-for="TotalTickets" class="text-danger"></span>
             </div>
 

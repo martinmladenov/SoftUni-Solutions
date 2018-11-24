@@ -8,11 +8,11 @@ namespace Eventures.Models
         public string Id { get; set; }
 
         [Required]
-        [StringLength(100, MinimumLength = 3)]
+        [StringLength(100, MinimumLength = 10)]
         public string Name { get; set; }
 
         [Required]
-        [StringLength(100, MinimumLength = 3)]
+        [StringLength(100, MinimumLength = 1)]
         public string Place { get; set; }
 
         [Required]
@@ -22,6 +22,7 @@ namespace Eventures.Models
         public DateTime EndDate { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue)]
         public int TotalTickets { get; set; }
 
         [Required]

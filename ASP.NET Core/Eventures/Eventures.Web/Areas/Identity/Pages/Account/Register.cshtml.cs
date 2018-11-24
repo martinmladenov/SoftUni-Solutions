@@ -39,6 +39,7 @@ namespace Eventures.Web.Areas.Identity.Pages.Account
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",
                 MinimumLength = 3)]
+            [RegularExpression(@"^[\w_\-.*~]{3,}$")]
             public string Username { get; set; }
 
             [Required]
@@ -48,7 +49,7 @@ namespace Eventures.Web.Areas.Identity.Pages.Account
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",
-                MinimumLength = 3)]
+                MinimumLength = 5)]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -71,8 +72,9 @@ namespace Eventures.Web.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "UCN")]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",
-                MinimumLength = 3)]
+            [StringLength(10, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",
+                MinimumLength = 10)]
+            [RegularExpression(@"\d{10}")]
             public string UniqueCitizenNumber { get; set; }
         }
 

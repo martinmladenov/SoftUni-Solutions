@@ -16,7 +16,7 @@ namespace Eventures.Services.Models
         public string LastName { get; set; }
         
         [Required]
-        [StringLength(100, MinimumLength = 3)]
+        [StringLength(100, MinimumLength = 10)]
         public string UniqueCitizenNumber { get; set; }
         
     }

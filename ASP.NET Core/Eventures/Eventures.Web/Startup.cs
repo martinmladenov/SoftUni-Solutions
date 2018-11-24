@@ -34,7 +34,7 @@
             services.AddIdentity<EventuresUser, IdentityRole>(options =>
                 {
                     options.Password.RequireDigit = false;
-                    options.Password.RequiredLength = 3;
+                    options.Password.RequiredLength = 5;
                     options.Password.RequireLowercase = false;
                     options.Password.RequiredUniqueChars = 0;
                     options.Password.RequireNonAlphanumeric = false;
