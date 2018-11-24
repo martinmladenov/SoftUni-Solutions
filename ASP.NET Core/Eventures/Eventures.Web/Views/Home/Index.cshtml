@@ -1,0 +1,34 @@
+﻿@using Eventures.Infrastructure
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<main class="mt-3 mb-5 container">
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <div class="jumbotron eventures-bg-color text-dark">
+            <h1>Eventures - The best ticket service in the world.</h1>
+            <hr class="hr-2 bg-black">
+            <h3><a asp-area="Identity" asp-page="/Account/Login">Login</a> to start "eventing".</h3>
+            <h3><a asp-area="Identity" asp-page="/Account/Register">Register</a> if you don't have an account.</h3>
+        </div>
+    }
+    else
+    {
+        <div class="jumbotron eventures-bg-color text-dark text-center">
+            @if (User.IsInRole(GlobalConstants.AdminRoleName))
+            {
+                <h1>Greetings, Administrator - @User.Identity.Name!</h1>
+                <hr class="hr-2 bg-gray">
+                <h4 class="text-gray">Enjoy your work.</h4>
+            }
+            else
+            {
+                <h1>Welcome, @User.Identity.Name!</h1>
+                <hr class="hr-2 bg-gray">
+                <h4 class="text-gray">Eventures wishes you an exciting experience.</h4>
+            }
+        </div>
+    }
+</main>
