@@ -6,6 +6,8 @@ namespace Eventures.Web.Models
 
     public class EventListingViewModel : IMapWith<EventuresEventServiceModel>
     {
+        public string Id { get; set; }
+        
         public string Name { get; set; }
 
         public string Place { get; set; }

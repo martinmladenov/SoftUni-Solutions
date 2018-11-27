@@ -1,6 +1,7 @@
 namespace Eventures.Services.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Eventures.Models;
     using Infrastructure.Mapping;
@@ -29,5 +30,7 @@ namespace Eventures.Services.Models
 
         [Required]
         public decimal PricePerTicket { get; set; }
+
+        public ICollection<OrderServiceModel> Orders { get; set; }
     }
 }

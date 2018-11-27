@@ -1,5 +1,6 @@
 namespace Eventures.Models
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Microsoft.AspNetCore.Identity;
 
@@ -16,6 +17,8 @@ namespace Eventures.Models
         [Required]
         [StringLength(100, MinimumLength = 10)]
         public string UniqueCitizenNumber { get; set; }
+        
+        public ICollection<Order> Orders { get; set; }
         
     }
 }

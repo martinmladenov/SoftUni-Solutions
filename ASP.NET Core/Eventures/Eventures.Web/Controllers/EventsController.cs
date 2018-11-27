@@ -15,12 +15,15 @@ namespace Eventures.Web.Controllers
     public class EventsController : Controller
     {
         private readonly IEventsService eventsService;
+        private readonly IOrdersService ordersService;
         private readonly ILogger logger;
 
-        public EventsController(IEventsService eventsService, ILogger<EventsController> logger)
+        public EventsController(IEventsService eventsService, ILogger<EventsController> logger,
+            IOrdersService ordersService)
         {
             this.eventsService = eventsService;
             this.logger = logger;
+            this.ordersService = ordersService;
         }
 
         [Authorize]
@@ -56,6 +59,16 @@ namespace Eventures.Web.Controllers
             this.logger.LogInformation("Event created: " + serviceModel.Name, serviceModel);
 
             return this.RedirectToAction("All");
+        }
+
+        [Authorize]
+        public async Task<IActionResult> My()
+        {
+            var orders = (await this.ordersService
+                    .GetAllForUser(this.User.Identity.Name))
+                .Select(Mapper.Map<OrderListingViewModel>);
+
+            return this.View(orders);
         }
     }
 }

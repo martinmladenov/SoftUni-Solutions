@@ -29,15 +29,31 @@
                     {
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-black" href="#" id="navbarDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Events</a>
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Events
+                            </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" asp-controller="Events" asp-action="All">All Events</a>
+                                <a class="dropdown-item" asp-controller="Events" asp-action="My">My Events</a>
                                 @if (User.IsInRole(GlobalConstants.AdminRoleName))
                                 {
                                     <a class="dropdown-item" asp-controller="Events" asp-action="Create">Create Event</a>
                                 }
                             </div>
                         </li>
+
+                        if (User.IsInRole(GlobalConstants.AdminRoleName))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-black" href="#" id="navbarDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Orders
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-controller="Orders" asp-action="All">All Orders</a>
+                                </div>
+                            </li>
+                        }
                     }
                 </ul>
                 <partial name="_LoginPartial"/>

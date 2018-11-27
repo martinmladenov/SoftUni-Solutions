@@ -1,5 +1,6 @@
 namespace Eventures.Services.Models
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Eventures.Models;
     using Infrastructure.Mapping;
@@ -19,5 +20,6 @@ namespace Eventures.Services.Models
         [StringLength(100, MinimumLength = 10)]
         public string UniqueCitizenNumber { get; set; }
         
+        public ICollection<OrderServiceModel> Orders { get; set; }
     }
 }

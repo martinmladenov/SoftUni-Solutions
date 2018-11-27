@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "All Events";
-    const string dateFormat = "dd-MMM-yyyy hh:mm:ss";
+    const string dateFormat = "dd-MMM-yyyy hh:mm";
 }
 
 <main class="mt-3 mb-5 container">
@@ -12,10 +12,11 @@
         <thead>
         <tr class="row font-weight-bold">
             <th class="col-md-1">#</th>
-            <th class="col-md-5">Name</th>
+            <th class="col-md-2">Name</th>
             <th class="col-md-2">Start</th>
             <th class="col-md-2">End</th>
             <th class="col-md-2">Place</th>
+            <th class="col-md-3">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -28,10 +29,16 @@
 
             <tr class="row">
                 <th class="col-md-1">@(i + 1)</th>
-                <td class="col-md-5">@m.Name</td>
+                <td class="col-md-2">@m.Name</td>
                 <td class="col-md-2">@m.StartDate.ToString(dateFormat)</td>
                 <td class="col-md-2">@m.EndDate.ToString(dateFormat)</td>
                 <td class="col-md-2">@m.Place</td>
+                <td class="col-md-3">
+                    @await Html.PartialAsync("_OrderPartial", new OrderCreateBindingModel
+                    {
+                        EventId = m.Id
+                    })
+                </td>
             </tr>
         }
         </tbody>
