@@ -33,7 +33,11 @@ namespace Eventures.Web.Controllers
 
             serviceModel.OrderedOn = DateTime.Now;
 
-            await this.ordersService.Create(serviceModel, this.User.Identity.Name);
+            var result = await this.ordersService.Create(serviceModel, this.User.Identity.Name);
+            if (!result)
+            {
+                return this.RedirectToAction("All", "Events");
+            }
 
             return this.RedirectToAction("My", "Events");
         }

@@ -1,6 +1,7 @@
 namespace Eventures.Services
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
@@ -33,6 +34,7 @@ namespace Eventures.Services
         public async Task<IEnumerable<EventuresEventServiceModel>> GetAll()
         {
             return await this.context.Events
+                .Where(e => e.TotalTickets > 0)
                 .ProjectTo<EventuresEventServiceModel>()
                 .ToArrayAsync();
         }

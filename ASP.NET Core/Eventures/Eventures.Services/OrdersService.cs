@@ -26,7 +26,9 @@ namespace Eventures.Services
 
             var user = await this.context.Users.SingleOrDefaultAsync(u => u.UserName == userName);
 
-            if (user == null)
+            var ev = await this.context.Events.SingleOrDefaultAsync(e => e.Id == model.EventId);
+
+            if (user == null || ev == null || ev.TotalTickets < model.TicketsCount)
             {
                 return false;
             }
@@ -34,6 +36,10 @@ namespace Eventures.Services
             var order = Mapper.Map<Order>(model);
 
             order.User = user;
+
+            ev.TotalTickets -= model.TicketsCount;
+
+            this.context.Events.Update(ev);
 
             await this.context.Orders.AddAsync(order);
 
