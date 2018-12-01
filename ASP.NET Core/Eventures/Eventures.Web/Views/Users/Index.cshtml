@@ -1,0 +1,50 @@
+@model IEnumerable<UserListingViewModel>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<main class="mt-3 mb-5 container">
+    <h1 class="text-center">All Users</h1>
+    <hr class="hr-2 eventures-bg-color"/>
+    <table class="table table-hover">
+        <thead>
+        <tr class="row font-weight-bold">
+            <th class="col-md-3">Username</th>
+            <th class="col-md-3">Name</th>
+            <th class="col-md-2">Email</th>
+            <th class="col-md-2">UCN</th>
+            <th class="col-md-2">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var user in Model)
+        {
+            <tr class="row @(user.IsAdmin ? "font-weight-bold" : "")">
+                <td class="col-md-3">@user.UserName @(user.IsAdmin ? "(Admin)" : "")</td>
+                <td class="col-md-3">@user.FirstName @user.LastName</td>
+                <td class="col-md-2">@user.Email</td>
+                <td class="col-md-2">@user.UniqueCitizenNumber</td>
+                <td class="col-md-2">
+                    @if (!user.IsAdmin)
+                    {
+                        <form asp-action="Promote" asp-controller="Users" method="post">
+                            <input type="hidden" name="userId" value="@user.Id">
+                            <button type="submit" class="btn eventures-bg-color">Promote</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-action="Demote" asp-controller="Users" method="post">
+                            <input type="hidden" name="userId" value="@user.Id">
+                            <button type="submit" class="btn btn-danger">Demote</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <hr class="hr-2 eventures-bg-color"/>
+
+</main>
