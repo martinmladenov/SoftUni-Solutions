@@ -1,5 +1,6 @@
 namespace Eventures.Web.Controllers
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
     using AutoMapper;
@@ -27,13 +28,30 @@ namespace Eventures.Web.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(int? page)
         {
-            var events = (await this.eventsService.GetAll())
+            if (!page.HasValue || page.Value < 1)
+            {
+                page = 1;
+            }
+
+            var allEvents = await this.eventsService.GetAll();
+
+            var allEventsArr = allEvents as EventuresEventServiceModel[] ?? allEvents.ToArray();
+
+            var events = allEventsArr
+                .OrderBy(e => e.StartDate)
+                .Skip(10 * (page.Value - 1))
+                .Take(10)
                 .Select(Mapper.Map<EventListingViewModel>)
                 .ToArray();
 
-            return this.View(events);
+            return this.View(new AllEventsViewModel
+            {
+                Events = events,
+                CurrentPage = page.Value,
+                PageCount = (int) Math.Ceiling((double) allEventsArr.Length / 10)
+            });
         }
 
         [Authorize(Roles = GlobalConstants.AdminRoleName)]
