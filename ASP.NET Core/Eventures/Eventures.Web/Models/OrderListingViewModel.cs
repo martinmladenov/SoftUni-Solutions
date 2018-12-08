@@ -15,7 +15,7 @@ namespace Eventures.Web.Models
         
         public int TicketsCount { get; set; }
         
-        public void ConfigureMapping(Profile mapper)
+        public void ConfigureMapping(IMapperConfigurationExpression mapper)
         {
             mapper.CreateMap<OrderServiceModel, OrderListingViewModel>()
                 .ForMember(dest => dest.UserName, opt =>
